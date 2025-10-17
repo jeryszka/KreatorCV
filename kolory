@@ -6,3 +6,15 @@ biały - tło
 #2C4044
 #DDE0B6
 #E6A04A
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<button onclick="generatePDF()">Eksportuj do PDF</button>
+
+<script>
+  function generatePDF() {
+    const element = document.getElementById('myDiv'); // ID Twojego diva
+    html2pdf().from(element).save('plik.pdf');
+  }
+</script>
