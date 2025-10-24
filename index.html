@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kreator CV</title>
+  <style>
+        body {
+            margin: 0;
+            display: grid;
+            grid-template-rows: 100px 1200px 200px;
+            grid-template-columns: 1fr;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        menu{
+            position: absolute;
+            left: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #2C868E;
+        }
+
+        header {
+            background-color: white;
+            color: #2C868E;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        footer{
+            background-color: rgba(57, 179, 190, 0.295);
+            font-size: 0.2rem;
+
+        }
+
+        #content-container{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background-color: rgba(57, 179, 190, 0.295);
+        }
+
+        .text{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 7rem;
+        }
+
+        @media (max-width: 768px) {
+        body {
+            grid-template-rows: 200px 1000px 300px;
+        }
+        }
+
+        @media (max-width: 480px) {
+        body {
+            grid-template-rows: 200px 800px 200px;
+        }
+        }
+
+        .t1{
+            font-size: 3rem;
+        }
+
+        #anchor-button{
+            color: white;
+            border: none;
+            width: 170px;
+            height: 50px;
+            background-color: #2C868E;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+
+        #anchor-button:hover{
+            transition: 0.2s;
+            background-color: #27737a;
+        }
+
+        menu{
+            z-index: 1;
+        }
+
+  </style>
+</head>
+<body>
+    <header><menu>☰</menu><h1>KREATOR CV</h1></header>
+    <main>
+        <div id="content-container">
+            <div class="text t1"> 
+                <p>Darmowy <br>kreator CV!</p>
+                <a href="#id"><button id="anchor-button">Stwórz CV</button></a></div>
+            <div class="text t2">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi quod placeat praesentium ipsum laborum nostrum, reiciendis consequatur, nihil aperiam reprehenderit omnis itaque cumque laudantium est perferendis doloremque exercitationem? Voluptatum, minus.<br>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis a tempore eius nostrum commodi, minima dolores tenetur soluta molestias architecto ducimus voluptas dolor, eligendi laborum repellat. Incidunt suscipit cum recusandae!
+            </div>
+            <div id="CVtemplate-container">
+                
+            </div>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>
