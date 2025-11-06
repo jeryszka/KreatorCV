@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV - A4</title>
+<style>
+    body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: grey;
+        margin: 0;
+    }
+
+    #CV-container{
+        width: 210mm;        /* szerokość A4 */
+        height: 297mm;       /* wysokość A4 */
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 70mm 70mm 70mm; /* proporcje kolumn */
+        grid-template-rows: 74.25mm 74.25mm 74.25mm 74.25mm; /* proporcje wierszy */
+        grid-template-areas: 
+            "h h h"
+            "c exp exp"
+            "s exp exp"
+            "s edu edu";
+        background-color: white;
+        color: #333;
+    }
+
+    header{
+        grid-area: h;
+        background-color: #2C868E;
+        color: white;
+        display: flex;
+        align-items: center;
+        padding-left: 15px;
+        font-size: 2rem;
+    }
+
+    .img{
+        width: 50mm;
+        height: 50mm;
+        background-color: white;
+        margin-right: 15px;
+    }
+
+    #imie{
+        font-weight: bold;
+        font-size: 2rem;
+    }
+
+    #contact{ grid-area: c; padding: 5px; }
+    #skills{ grid-area: s; padding: 5px; }
+    #expirience{ grid-area: exp; padding: 5px; }
+    #education{ grid-area: edu; padding: 5px; }
+
+    h3{
+        color: #2C868E;
+        border-bottom: 1px solid #2C868E;
+        margin: 5px 0;
+    }
+
+    /* Przy drukowaniu */
+    @media print {
+        body{
+            background-color: white;
+        }
+        #CV-container{
+            box-shadow: none;
+        }
+    }
+    @page {
+    size: A4;
+    margin: 0;
+    }
+
+</style>
+</head>
+<body>
+    <div id="CV-container">
+        <header>
+            <div class="img"></div>
+            <div id="imie">Grzegorz Jercha</div>
+        </header>
+        <div id="contact">
+            <h3>Kontakt</h3>
+            email: grzes_j0@wp.pl<br>
+            numer telefonu: ghhfgfh
+        </div>
+        <div id="skills">
+            <h3>Umiejętności</h3>
+        </div>
+        <div id="expirience">
+            <h3>Doświadczenie</h3>
+            dysyj
+        </div>
+        <div id="education">
+            <h3>Edukacja</h3>
+            ydytd <br>
+            yufufufyu
+        </div>
+    </div>
+</body>
+</html>

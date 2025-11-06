@@ -1,0 +1,149 @@
+// === IMPORTY ===
+const express = require('express');
+const bodyParser = require('body-parser');
+const puppeteer = require('puppeteer');
+const fs = require('fs');
+const path = require('path');
+
+// === KONFIGURACJA SERWERA ===
+const app = express();
+app.use(bodyParser.json());
+app.use(express.static('public')); // udostępnia pliki z folderu public
+
+// === ENDPOINT DO GENEROWANIA PDF ===
+app.post('/generate-pdf', async (req, res) => {
+    try {
+        // Pobierz dane z formularza
+        const { name, email, phone, experience, education } = req.body;
+        console.log('📩 Dane odebrane z formularza:', req.body);
+
+        // Wczytaj szablon HTML
+        const templatePath = path.join(__dirname, 'public', 'cv-template.html');
+        let templateHTML = fs.readFileSync(templatePath, 'utf8');
+
+        // Wstaw dane do szablonu
+        templateHTML = templateHTML
+            .replace('{{NAME}}', name || '')
+            .replace('{{EMAIL}}', email || '')
+            .replace('{{PHONE}}', phone || '')
+            .replace('{{EXPERIENCE}}', experience || '')
+            .replace('{{EDUCATION}}', education || '');
+
+        // === Wczytaj CSS i wstrzyknij go do dokumentu ===
+        // const cssPath = path.join(__dirname, 'public', 'cv-style.css');
+        // const cssContent = fs.readFileSync(cssPath, 'utf8');
+        // console.log('📁 CSS załadowany: ', cssContent.slice(0, 200)); // 👈 to dodaj
+
+        // if (templateHTML.includes('</head>')) {
+        //     templateHTML = templateHTML.replace('</head>', `<style>${cssContent}</style></head>`);
+        // } else {
+        //     templateHTML = `<head><style>${cssContent}</style></head>` + templateHTML;
+        // }
+
+        // === GENEROWANIE PDF ===
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
+
+        const page = await browser.newPage();
+
+        // Załaduj zawartość HTML do Puppeteera
+        await page.setContent(templateHTML, { waitUntil: 'networkidle0' });
+
+        // 👇 DODAJ TEN FRAGMENT
+        // Czekamy chwilę, aż wszystkie style CSS się załadują i zrenderują
+        await page.waitForTimeout(500);
+
+        // Wygeneruj PDF
+        const pdfBuffer = await page.pdf({
+            format: 'A4',
+            printBackground: true,
+            margin: { top: '0mm', bottom: '0mm', left: '0mm', right: '0mm' }
+        });
+
+        await browser.close();
+
+        // === Wysłanie PDF do przeglądarki ===
+        res.set({
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': 'attachment; filename=Moje_CV.pdf',
+            'Content-Length': pdfBuffer.length
+        });
+        res.send(pdfBuffer);
+
+        console.log('✅ PDF wygenerowany pomyślnie!');
+    } catch (err) {
+        console.error('❌ Błąd podczas generowania PDF:', err);
+        res.status(500).send('Wystąpił błąd podczas generowania PDF.');
+    }
+});
+
+// === URUCHOMIENIE SERWERA ===
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`✅ Serwer działa na http://localhost:${PORT}`);
+});
+
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>CV</title>
+    <style>
+        @page { size: A4; margin: 0; }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0; padding: 0; color: #333;
+        }
+
+        .cv-container {
+            max-width: 210mm;
+            min-height: 297mm;
+            padding: 25mm;
+            box-sizing: border-box;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .cv-header {
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+
+        .cv-header h1 { margin:0; font-size:28px; color:#2e7d32; }
+        .cv-header p { font-size:14px; margin-top:5px; }
+
+        .cv-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .cv-section h2 { color:#4CAF50; margin-bottom:5px; }
+        .cv-section p { line-height:1.5; white-space: pre-line; }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <header class="cv-header">
+            <h1>{{NAME}}</h1>
+            <p>{{EMAIL}} | {{PHONE}}</p>
+        </header>
+
+        <section class="cv-section">
+            <h2>Doświadczenie zawodowe</h2>
+            <p>{{EXPERIENCE}}</p>
+        </section>
+
+        <section class="cv-section">
+            <h2>Wykształcenie</h2>
+            <p>{{EDUCATION}}</p>
+        </section>
+    </div>
+</body>
+</html>
