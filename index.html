@@ -8,7 +8,7 @@
         body {
             margin: 0;
             display: grid;
-            grid-template-rows: 100px 1200px 200px;
+            grid-template-rows: 100px 1430px 300px;
             grid-template-columns: 1fr;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -35,9 +35,12 @@
         }
 
         footer{
-            background-color: rgba(57, 179, 190, 0.295);
+            background-color: #2C868E;
             font-size: 0.2rem;
-
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
 
         #content-container{
@@ -70,6 +73,10 @@
             font-size: 3rem;
         }
 
+        .t2{
+            font-size: 1.5rem;
+        }
+
         #anchor-button{
             color: white;
             border: none;
@@ -88,7 +95,52 @@
         menu{
             z-index: 1;
         }
+        #CVtemplate-container{
+            grid-column: 1, -1;
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            flex-direction: column;
+        }
 
+        .t3{
+            font-size: 1.5rem;
+        }
+        #text-t3-p{
+            font-size: 2rem;
+        }
+        .t4{
+            color: white;
+            font-size: 2rem;
+            padding: 0  ;
+        }
+        #CVtemplates {
+            display: grid; 
+            grid-template-columns: repeat(4, 270px);
+            gap: 20px;
+            width: fit-content; 
+            margin: 0 auto; 
+        }
+
+        .temp{
+            width: 250px;
+            height: 350px;
+            background-color: rgb(192, 192, 192);
+            cursor: pointer ;
+        }
+        .temp:hover{
+            background-color: grey;
+        }
+        #footer-grid-container{
+            display: grid;
+            grid-template-columns: repeat(4, 90px);
+            margin: 0 auto; 
+            color: white;
+            font-size: 1rem;
+            width: fit-content;     /* <-- DODAJ TO */
+            margin: 0 auto;         /* <-- I TO */
+            gap: 50px;
+        }
   </style>
 </head>
 <body>
@@ -97,18 +149,43 @@
         <div id="content-container">
             <div class="text t1"> 
                 <p>Darmowy <br>kreator CV!</p>
-                <a href="#id"><button id="anchor-button">Stwórz CV</button></a></div>
+                <a href="#CVtemplate-container"><button id="anchor-button">Stwórz CV</button></a></div>
             <div class="text t2">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi quod placeat praesentium ipsum laborum nostrum, reiciendis consequatur, nihil aperiam reprehenderit omnis itaque cumque laudantium est perferendis doloremque exercitationem? Voluptatum, minus.<br>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis a tempore eius nostrum commodi, minima dolores tenetur soluta molestias architecto ducimus voluptas dolor, eligendi laborum repellat. Incidunt suscipit cum recusandae!
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi quod placeat praesentium ipsum laborum nostrum.
+             </div>
+        </div>
+        <div id="CVtemplate-container">
+            <div class="text t3 ">
+                <p id="text-t3-p">Darmowe szablony i wzory CV!</p>
+                Dzięki naszej stronie możesz wybrać odpowiadający tobie szablon CV, <br>który pomoże Ci łatwo stworzyć własne CV w ciągu kilku minut.
             </div>
-            <div id="CVtemplate-container">
-                
+
+            <div id="CVtemplates">
+                <div class="temp"></div>
+                <div class="temp"></div>
+                <div class="temp"></div>
+                <div class="temp"></div>
             </div>
         </div>
     </main>
     <footer>
-
+        <div class="text t4">
+            <h3>KREATOR CV</h3>
+        </div>
+        <div id="footer-grid-container">
+            <div class="footer-element">
+                Home
+            </div>
+            <div class="footer-element">
+                About
+            </div>
+            <div class="footer-element">
+                Contact us
+            </div>
+            <div class="footer-element">
+                Follow us
+            </div>
+        </div>
     </footer>
 </body>
 </html>
