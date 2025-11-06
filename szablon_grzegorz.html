@@ -1,98 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: grey;
-        }
-        #CV-container{
-            display: grid;
-            grid-template-columns: 300px 300px 300px;
-            grid-template-rows: 250px 250px 250px 250px;
-            grid-template-areas: "h h h"
-                                 "c exp exp"
-                                 "s exp exp"
-                                 "s edu edu";
-            background-color: white;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV PDF</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        background: #ccc;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px;
+    }
 
-        header{
-            padding-left: 15px;
-            display: flex;
-            align-items: center;
-            grid-area: h;
-            background-color: #2C868E;
+    #CV-container {
+        width: 794px;  /* A4 width in px at 96dpi */
+        height: 1123px; /* A4 height in px */
+        background: white;
+        display: grid;
+        grid-template-columns: 264px 264px 264px;
+        grid-template-rows: 280px 280px 280px 280px;
+        grid-template-areas:
+            "h h h"
+            "c exp exp"
+            "s exp exp"
+            "s edu edu";
+        box-sizing: border-box;
+        padding: 15px;
+        overflow: hidden;
+    }
 
-            color: white;
-            font-size: 3.5rem;
-        }
-        #contact{
-            grid-area: c;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-        #skills{
-            grid-area: s;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-        #expirience{
-            grid-area: exp;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-        #education{
-            grid-area: edu;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-        h3{
-            color: #2C868E;
-            border-bottom: 1px solid #2C868E;
-        }
+    header {
+        grid-area: h;
+        display: flex;
+        align-items: center;
+        padding-left: 15px;
+        background: #2C868E;
+        color: white;
+        font-size: 2.5rem;
+    }
 
-        /*tymczasowe*/
-        .img{
-            width:200px;
-            height: 200px;
-            background-color: white;
-        }
+    #contact { grid-area: c; background: #2c868e67; padding: 10px; overflow: hidden; }
+    #skills { grid-area: s; background: #2c868e67; padding: 10px; overflow: hidden; }
+    #expirience { grid-area: exp; padding: 10px; overflow: hidden; }
+    #education { grid-area: edu; padding: 10px; overflow: hidden; }
 
-        /*-------------*/
+    h3 { color: #2C868E; border-bottom: 1px solid #2C868E; margin-bottom: 5px; }
+    .img { width: 100px; height: 100px; background: white; }
+    #imie { margin-left: 20px; }
 
-        #imie{
-            margin-left: 40px;
-        }
-    </style>
+    p { margin: 5px 0; font-size: 12px; line-height: 1.2; }
+</style>
 </head>
 <body>
-    <div id="CV-container">
-        <header>
-            <div class="img"></div>
-            <div id="imie">
-                Imie <br>
-                Nazwisko
-            </div>
-        </header>
-        <div id="contact">
-            <h3>Kontakt</h3>
-        </div>
-        <div id="skills">
-            <h3>Umiejętności</h3>
-        </div>
-        <div id="expirience">
-            <h3>Doświadczenie</h3>
-        </div>
-        <div id="education">
-            <h3>Edukacja</h3>
-        </div>
+<div id="CV-container">
+    <header>
+        <div class="img"></div>
+        <div id="imie">Imię<br>Nazwisko</div>
+    </header>
+
+    <div id="contact">
+        <h3>KONTAKT</h3>
+        <ol>
+            <li>email@email.com</li>
+            <li>tel: 432 324 324</li>
+            <li>Na dołku 10</li>
+        </ol>
     </div>
+
+    <div id="skills">
+        <h3>UMIEJĘTNOŚCI</h3>
+        <p>JavaScript, HTML, CSS, React, DCS, F-16 Simulation</p>
+    </div>
+
+    <div id="expirience">
+        <h3>DOŚWIADCZENIE</h3>
+        <p>Praca nad projektami webowymi i symulacjami lotniczymi. Doświadczenie w tworzeniu misji w DCS oraz w F-16.</p>
+        <p>Realizacja projektów w zespole oraz samodzielnie, tworzenie raportów i dokumentacji technicznej.</p>
+    </div>
+
+    <div id="education">
+        <h3>EDUKACJA</h3>
+        <h4>Szkoła średnia XYZ</h4>
+        <p>Matura 2020, profil informatyczny</p>
+        <h4>Studia ABC</h4>
+        <p>Informatyka, stopień licencjata</p>
+    </div>
+</div>
+
+<button id="save-btn" style="margin-top: 20px; padding: 10px 20px;">Pobierz PDF</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+document.getElementById("save-btn").addEventListener("click", () => {
+    const element = document.getElementById("CV-container");
+
+    const opt = {
+        margin:       10,
+        filename:     'cv.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'px', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().set({
+  margin: 10,
+  filename: 'cv.pdf',
+  image: { type: 'jpeg', quality: 1 },
+  html2canvas: { scale: 3 }, // wysoka skala dla ostrego PDF
+  jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+}).from(element).save();
+
+});
+</script>
 </body>
 </html>
