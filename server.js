@@ -19,7 +19,7 @@ app.get("/test", (req, res) => {
 
 // === GENEROWANIE PODGLĄDU ===
 app.post("/generate", (req, res) => {
-    const { name, email, phone, experience, education, huj} = req.body;
+    const { name, email, phone, experience, education} = req.body;
     lastData = req.body;
 
     const templatePath = path.join(__dirname, "public", "cv-template.html");
@@ -30,8 +30,7 @@ app.post("/generate", (req, res) => {
         .replace("{{EMAIL}}", email || "")
         .replace("{{PHONE}}", phone || "")
         .replace("{{EXPERIENCE}}", experience || "")
-        .replace("{{EDUCATION}}", education || "")
-        .replace("{{huj}}", huj || "");
+        .replace("{{EDUCATION}}", education || "");
 
     // Zapisujemy czysty HTML do PDF (bez przycisku)
     const pdfPath = path.join(__dirname, "public", "generated-cv.pdf.html");
