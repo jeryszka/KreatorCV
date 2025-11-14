@@ -1,0 +1,70 @@
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Env/config
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build / output
+dist/
+build/
+coverage/
+.tmp/
+temp/
+logs/
+*.log
+
+# Editor/IDE
+.vscode/
+*.code-workspace
+.idea/
+
+# Caches
+.npm/
+.eslintcache
+.stylelintcache
+.node_repl_history
+
+# Puppeteer cache (zalecane, trzyma Chromium i artefakty)
+.cache/
+.cache/puppeteer/
+puppeteer-cache/
+**/.local-chromium/
+**/chromium/
+**/chrome-linux/
+**/chrome-win/
+**/chrome-mac/
+
+# Test artifacts
+*.tgz
+.vitest/
+.jest/
+jest-html-reporters-*.html
+
+# Serverless / tools (opcjonalnie, jeśli używasz)
+.serverless/
+.fusebox/
+.dynamodb/
+.firebase/
+.tern-port
+
+# Yarn v3 (jeśli używasz)
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
