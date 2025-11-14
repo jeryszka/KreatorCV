@@ -19,7 +19,7 @@ app.get("/test", (req, res) => {
 
 // === GENEROWANIE PODGLĄDU ===
 app.post("/generate", (req, res) => {
-    const { name, email, phone, experience, education} = req.body;
+    const { name, surname, email, phone, experience, education} = req.body;
     lastData = req.body;
 
     const templatePath = path.join(__dirname, "public", "cv-template.html");
@@ -27,6 +27,7 @@ app.post("/generate", (req, res) => {
 
     html = html
         .replace("{{NAME}}", name || "")
+        .replace("{{SURNAME}}", surname || "")
         .replace("{{EMAIL}}", email || "")
         .replace("{{PHONE}}", phone || "")
         .replace("{{EXPERIENCE}}", experience || "")
