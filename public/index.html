@@ -8,7 +8,7 @@
         body {
             margin: 0;
             display: grid;
-            grid-template-rows: 100px 1430px 300px;
+            grid-template-rows: 100px 1430px 100px;
             grid-template-columns: 1fr;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -21,32 +21,35 @@
             cursor: pointer;
             background: none;
             border: none;
-            color: #2C868E;
+            color: #000a24;
         }
 
         header {
             background-color: white;
-            color: #2C868E;
+            color: #000a24;
             font-size: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            box-shadow: 0px 10px 15px rgba(255, 255, 255, 0.2);
         }
 
         footer{
-            background-color: #2C868E;
+            background-color: #000a24;
             font-size: 0.2rem;
             display: flex;
             justify-content: center;
             flex-direction: column;
             align-items: center;
+            height: 100px;
         }
 
         #content-container{
+            color: #FFFFFF;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            background-color: rgba(57, 179, 190, 0.295);
+            background-color: #000a24;
         }
 
         .text{
@@ -74,22 +77,25 @@
         }
 
         .t2{
+            padding: 4rem;
             font-size: 1.5rem;
         }
 
         #anchor-button{
-            color: white;
+            color: black;
             border: none;
             width: 170px;
             height: 50px;
-            background-color: #2C868E;
+            background-color: #FFFF;
             border-radius: 5px;
             font-size: 1.1rem;
+            cursor: pointer;
         }
 
         #anchor-button:hover{
             transition: 0.2s;
-            background-color: #27737a;
+            background-color: #4b5770;
+            color: white;
         }
 
         menu{
@@ -112,7 +118,8 @@
         .t4{
             color: white;
             font-size: 2rem;
-            padding: 0  ;
+            padding: 0;
+            margin: 0;
         }
         #CVtemplates {
             display: grid; 
@@ -131,15 +138,11 @@
         .temp:hover{
             background-color: grey;
         }
-        #footer-grid-container{
-            display: grid;
-            grid-template-columns: repeat(4, 90px);
-            margin: 0 auto; 
+
+        #footer-text{
             color: white;
             font-size: 1rem;
-            width: fit-content;     /* <-- DODAJ TO */
-            margin: 0 auto;         /* <-- I TO */
-            gap: 50px;
+            font-weight: normal;
         }
   </style>
 </head>
@@ -151,7 +154,7 @@
                 <p>Darmowy <br>kreator CV!</p>
                 <a href="#CVtemplate-container"><button id="anchor-button">Stwórz CV</button></a></div>
             <div class="text t2">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi quod placeat praesentium ipsum laborum nostrum.
+                <img src="images/CV.jpg" style="border-radius: 15px;">
              </div>
         </div>
         <div id="CVtemplate-container">
@@ -169,23 +172,14 @@
         </div>
     </main>
     <footer>
-        <div class="text t4">
-            <h3>KREATOR CV</h3>
-        </div>
-        <div id="footer-grid-container">
-            <div class="footer-element">
-                Home
-            </div>
-            <div class="footer-element">
-                About
-            </div>
-            <div class="footer-element">
-                Contact us
-            </div>
-            <div class="footer-element">
-                Follow us
-            </div>
-        </div>
+            <h3 id="footer-text">© Kreator CV. Wszystkie prawa zastrzeżone.</h3>
     </footer>
+    <script>
+        const btn = document.getElementById('anchor-button');
+        btn.addEventListener('click', function(e) {
+            e.preventDefault(); // blokuje natychmiastowy skok
+            document.querySelector('#CVtemplate-container').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>

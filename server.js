@@ -8,61 +8,59 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static("public")); // statyczne pliki HTML, CSS, JS
+app.use(express.static("public"));
 
-let lastData = {}; // przechowuje dane z formularza
+let lastData = {};
 
-// Test serwera
+// Test
 app.get("/test", (req, res) => {
-    res.send("✅ Serwer działa poprawnie 🚀");
+    res.send("Server działa 🚀");
 });
 
-// === GENEROWANIE PODGLĄDU ===
+// GENEROWANIE
 app.post("/generate", (req, res) => {
-    const { name, surname, email, phone, experience, education} = req.body;
+    const { name, surname, email, phone, about, education } = req.body;
+    console.log("REQ BODY:", req.body);
     lastData = req.body;
-
     const templatePath = path.join(__dirname, "public", "cv-template.html");
     let html = fs.readFileSync(templatePath, "utf8");
-
     html = html
-        .replace("{{NAME}}", name || "")
-        .replace("{{SURNAME}}", surname || "")
-        .replace("{{EMAIL}}", email || "")
-        .replace("{{PHONE}}", phone || "")
-        .replace("{{EXPERIENCE}}", experience || "")
-        .replace("{{EDUCATION}}", education || "");
+        .replaceAll("{{NAME}}", name || "")
+        .replaceAll("{{SURNAME}}", surname || "")
+        .replaceAll("{{EMAIL}}", email || "")
+        .replaceAll("{{PHONE}}", phone || "")
+        .replaceAll("{{ABOUT}}", about || "")
+        .replaceAll("{{EDUCATION}}", education || "");
 
-    // Zapisujemy czysty HTML do PDF (bez przycisku)
+    // Zapis HTML bez przycisku
     const pdfPath = path.join(__dirname, "public", "generated-cv.pdf.html");
     fs.writeFileSync(pdfPath, html);
 
-    // Tworzymy HTML podglądu w przeglądarce z przyciskiem
-    const previewHtml = html.replace(
+    // HTML podglądu
+    const previewHTML = html.replace(
         "</body>",
         `
         <div style="text-align:center; margin-top:30px;">
             <a href="/download-pdf"
-            style="display:inline-block; background-color:#4CAF50; color:white;
-                    padding:10px 20px; text-decoration:none; border-radius:5px;">
-            📄 Pobierz jako PDF
+               style="background:#4CAF50; color:white; padding:10px 20px;
+                      border-radius:5px; text-decoration:none;">
+                📄 Pobierz PDF
             </a>
         </div>
         </body>`
     );
 
-    const previewPath = path.join(__dirname, "public", "generated-cv.html");
-    fs.writeFileSync(previewPath, previewHtml);
+    fs.writeFileSync(path.join(__dirname, "public", "generated-cv.html"), previewHTML);
 
     res.redirect("/preview");
 });
 
-// Podgląd w przeglądarce
+// PODGLĄD
 app.get("/preview", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "generated-cv.html"));
 });
 
-// Pobranie PDF
+// PDF
 app.get("/download-pdf", async (req, res) => {
   try {
     const html = fs.readFileSync(
@@ -74,32 +72,28 @@ app.get("/download-pdf", async (req, res) => {
       headless: true,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
+
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "networkidle0" });
-
-    // krótki timeout dla bezpieczeństwa
-    await new Promise((resolve) => setTimeout(resolve, 500));
 
     const pdfBuffer = await page.pdf({
       format: "A4",
       printBackground: true,
-      margin: { top: "0mm", bottom: "0mm", left: "0mm", right: "0mm" },
+      margin: { top: "0mm", bottom: "0mm", left: "0mm", right: "0mm" }
     });
 
     await browser.close();
 
     res.set({
       "Content-Type": "application/pdf",
-      "Content-Disposition": "attachment; filename=Moje_CV.pdf",
+      "Content-Disposition": "attachment; filename=Moje_CV.pdf"
     });
+
     res.send(pdfBuffer);
   } catch (err) {
-    console.error("Błąd PDF:", err);
+    console.error("PDF ERROR:", err);
     res.status(500).send("Błąd podczas generowania PDF.");
   }
 });
 
-const PORT = 3000;
-app.listen(PORT, () =>
-    console.log(`Serwer działa na http://localhost:${PORT}`)
-);
+app.listen(3000, () => console.log("Serwer działa na http://localhost:3000"));

@@ -6,93 +6,393 @@
     <title>Kreator CV</title>
     <style>
         body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 40px;
-    }
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 20px;
+        }
+        header {
+            background-color: white;
+            color: #000a24;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0px 5px 10px rgba(104, 104, 104, 0.2);
 
-    .container {
-        max-width: 400px;
-        margin: auto;
-        background-color: white;
-        padding: 20px 30px;
-        border-radius: 12px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
+        }
+        menu{
+            position: absolute;
+            left: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #000a24;
+        }
+        .container {
+            max-width: 650px; /* Nieco większa szerokość */
+            margin: 40px auto 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        }
+        label {
+            margin-left: 10px;
+            font-weight: 600;
+            margin-top: 15px;
+            display: block;
+            color: #333;
+        }
+        input, textarea, select {
+            margin-left: 10px;
+            width: 95%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #000a24;
+            outline: none;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #000a24;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 17px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #212530;
+        }
+        #loadJsonBtn {
+            margin-top: 10px;
+            background-color: #3f51b5;
+        }
+        #loadJsonBtn:hover {
+            background-color: #303f9f;
+        }
 
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        /* Style dla pól dynamicznych (Umiejętności i Certyfikaty) */
+        .dynamic-input-group {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            width: 95%;
+            margin-top: 5px;
+        }
+        .dynamic-input-group input {
+            width: 100%;
+            margin: 0;
+        }
+        .dynamic-input-group button {
+            width: 100px;
+            margin: 0 0 0 10px;
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        .tag-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
 
-    label {
-        margin-left: 10px;
-        font-weight: 600;
-        margin-top: 10px;
-        display: block;
-    }
+        .tag-item {
+            display: inline-block;
+            background-color: #e0e7ff; 
+            color: #000a24;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
 
-    input, textarea {
-        margin-left: 10px;
-        width: 90%;
-        padding: 8px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-    }
+        .tag-item button {
+            background: none;
+            border: none;
+            color: #000a24;
+            margin-left: 5px;
+            padding: 0;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            width: auto;
+        }
+        
+        /* Styl dla sekcji RODO */
+        .rodo-consent {
+            margin-top: 25px;
+            padding: 15px;
+            border: 1px dashed #ccc;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
 
-    button {
-        margin-top: 20px;
-        width: 100%;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        padding: 10px;
-        font-size: 16px;
-        border-radius: 6px;
-        cursor: pointer;
-    }
+        .rodo-consent input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            margin-left: 0;
+        }
 
-    button:hover {
-        background-color: #45a049;
-    }
+        .rodo-consent label {
+            display: inline;
+            font-weight: normal;
+        }
 
+        #formh1
+        {
+            border-bottom: 3px solid #000a24;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #000a24;
+            padding-bottom: 10px;
+        }
     </style>
 </head>
 <body>
+    <header><h1>KREATOR CV</h1>
+        <menu>
+            <a href="index.html">
+                <svg width="35px" height="35px" viewBox="-18.19 -18.19 112.18 112.18" xmlns="http://www.w3.org/2000/svg" fill="#000a24" stroke="#000a24" stroke-width="7.580299999999999"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Group_64" data-name="Group 64" transform="translate(-624.082 -383.588)"> <path id="Path_56" data-name="Path 56" d="M660.313,383.588a1.5,1.5,0,0,1,1.06,2.561l-33.556,33.56a2.528,2.528,0,0,0,0,3.564l33.556,33.558a1.5,1.5,0,0,1-2.121,2.121L625.7,425.394a5.527,5.527,0,0,1,0-7.807l33.556-33.559A1.5,1.5,0,0,1,660.313,383.588Z" fill="#000a24"></path> </g> </g></svg>
+            </a>
+        </menu>
+    </header>
     <div class="container">
-        <h1>Kreator CV</h1>
+        <h1 id="formh1">Formularz CV</h1>
 
         <form id="cvForm" action="/generate" method="POST">
-            <label>Imię</label>
-            <input type="text" id="name" name="name" required>
+            <div class="form-group">
+                <label>Imię:</label>
+                <input type="text" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Nazwisko:</label>
+                <input type="text" name="surname" required>
+            </div>
 
-            <label>Nazwisko:</label>
-            <input type="text" id="surame" name="surame" required>
+            <div class="form-group">
+                <label>Adres (Miasto, Kod Pocztowy):</label>
+                <input type="text" name="address" placeholder="Np. Kraków, 30-001">
+            </div>
 
-            <label>Telefon:</label>
-            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" id="phone" name="phone" required>
+            <div class="form-group">
+                <label>Telefon:</label>
+                <input type="tel" name="phone" required>
+            </div>
 
-            <label>Email:</label>
-            <input type="email" id="email" name="email" required>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" name="email" required>
+            </div>
 
-            <label>Adres:</label>
-            <input type="text" id="address" name="address" required>
+            <div class="form-group">
+                <label>O mnie / Podsumowanie zawodowe:</label>
+                <textarea name="about" rows="4" required></textarea>
+            </div>
 
-            <label>O mnie:</label>
-            <textarea id="about" name="about" rows="4" style="max-width: 100%;" required></textarea>
+            <div class="form-group">
+                <label for="educationYears">Lata nauki:</label>
+                <input type="text" name="educationYears" placeholder="Np. 2018-2023">
+            </div>
 
-            <label>Wykształcenie:</label>
-            <textarea id="education" name="education" rows="3" style="max-width: 100%;" required></textarea>
+            <div class="form-group">
+                <label for="universitySelect">Uczelnia:</label>
+                <select id="universitySelect" name="university">
+                    <option value="">Wybierz uczelnię...</option>
+                    <option value="AGH (Akademia Górniczo-Hutnicza)">AGH (Akademia Górniczo-Hutnicza)</option>
+                    <option value="Politechnika Warszawska">Politechnika Warszawska</option>
+                    <option value="Uniwersytet Jagielloński">Uniwersytet Jagielloński</option>
+                    <option value="Uniwersytet Warszawski">Uniwersytet Warszawski</option>
+                    <option value="Politechnika Wrocławska">Politechnika Wrocławska</option>
+                    <option value="Politechnika Gdańska">Politechnika Gdańska</option>
+                    <option value="Inna/Szkoła Średnia">Inna/Szkoła Średnia</option>
+                </select>
+            </div>
 
-            <label>Doświadczenie zawodowe:</label>
-            <textarea id="experience" name="experience" rows="4" style="max-width: 100%;" required></textarea>
+            <div class="form-group">
+                <label for="educationField">Kierunek/Wydział:</label>
+                <input type="text" name="educationField" placeholder="Np. Informatyka Stosowana">
+            </div>
 
-            <button type="submit">Generuj PDF</button>
+            <div class="form-group">
+                <label>Doświadczenie zawodowe (Firma, Stanowisko, Zakres obowiązków, Lata):</label>
+                <textarea name="experience" rows="5" placeholder="Np. 2023-obecnie: Firma XYZ, Junior Developer, Tworzenie stron internetowych..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Umiejętności (np. twarde i miękkie):</label>
+                <div class="dynamic-input-group">
+                    <input type="text" id="skillInput" placeholder="Wpisz umiejętność (np. Python, Zarządzanie Czasem)">
+                    <button type="button" id="addSkillBtn">Dodaj</button>
+                </div>
+                <ul id="skillsList" class="tag-list"></ul>
+                <input type="hidden" name="skills" id="skillsHidden">
+            </div>
+
+            <div class="form-group">
+                <label>Certyfikaty/Kursy (Nazwa, Instytucja, Rok):</label>
+                <div class="dynamic-input-group">
+                    <input type="text" id="certificateInput" placeholder="Wpisz certyfikat (np. AWS Certified Developer - 2024)">
+                    <button type="button" id="addCertBtn">Dodaj</button>
+                </div>
+                <ul id="certList" class="tag-list"></ul>
+                <input type="hidden" name="certificates" id="certificatesHidden">
+            </div>
+            
+            <div class="form-group">
+                <label for="languageSelect">Języki obce:</label>
+                <select name="languages" id="languageSelect">
+                    <option value="">Wybierz język i poziom...</option>
+                    <option value="Angielski (B2)">Angielski (B2)</option>
+                    <option value="Niemiecki (A1)">Niemiecki (A1)</option>
+                    <option value="Hiszpański (C1)">Hiszpański (C1)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Zainteresowania:</label>
+                <textarea name="interests" rows="2" placeholder="Np. Wspinaczka, fotografia, literatura science-fiction..."></textarea>
+            </div>
+            
+            <div class="rodo-consent">
+                <input type="checkbox" id="rodo" name="rodo" required>
+                <label for="rodo">Wyrażam zgodę na przetwarzanie moich danych osobowych zawartych w CV na potrzeby rekrutacji (zgodnie z RODO).</label>
+            </div>
+
+            <button type="submit">Generuj CV</button>
         </form>
+
+        <button id="loadJsonBtn">Wczytaj dane z JSON</button>
+        <input type="file" id="jsonFileInput" accept=".json" style="display:none">
     </div>
 
-    <!-- <script src="script.js"></script> -->
+    <script>
+        const loadBtn = document.getElementById('loadJsonBtn');
+        const fileInput = document.getElementById('jsonFileInput');
+        const form = document.getElementById('cvForm');
+
+        // --- Funkcja do zarządzania listami dynamicznymi (Umiejętności i Certyfikaty) ---
+
+        function setupDynamicList(addButtonId, inputId, listId, hiddenInputId) {
+            const addButton = document.getElementById(addButtonId);
+            const inputField = document.getElementById(inputId);
+            const listElement = document.getElementById(listId);
+            const hiddenInput = document.getElementById(hiddenInputId);
+            let currentItems = [];
+
+            function renderList() {
+                listElement.innerHTML = '';
+                currentItems.forEach((item, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'tag-item';
+                    listItem.innerHTML = `${item} <button type="button" data-index="${index}">x</button>`;
+                    listElement.appendChild(listItem);
+                });
+                hiddenInput.value = currentItems.join('; '); // Aktualizacja ukrytego pola
+            }
+
+            addButton.addEventListener('click', () => {
+                const itemValue = inputField.value.trim();
+                if (itemValue && !currentItems.includes(itemValue)) {
+                    currentItems.push(itemValue);
+                    renderList();
+                    inputField.value = ''; // Reset input
+                }
+            });
+
+            // Obsługa klawisza Enter w polu tekstowym
+            inputField.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault(); // Zapobiega wysłaniu formularza
+                    addButton.click();
+                }
+            });
+
+            listElement.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    const indexToRemove = parseInt(e.target.getAttribute('data-index'));
+                    currentItems.splice(indexToRemove, 1);
+                    renderList();
+                }
+            });
+
+            // Zewnętrzna funkcja do ustawiania danych (używana przy wczytywaniu JSON)
+            return {
+                setItems: (items) => {
+                    currentItems = Array.isArray(items) ? items : (items ? items.split(';').map(s => s.trim()).filter(s => s.length > 0) : []);
+                    renderList();
+                },
+                getItems: () => currentItems
+            };
+        }
+
+        // Inicjalizacja list dynamicznych
+        const skillManager = setupDynamicList('addSkillBtn', 'skillInput', 'skillsList', 'skillsHidden');
+        const certManager = setupDynamicList('addCertBtn', 'certificateInput', 'certList', 'certificatesHidden');
+
+
+        // --- Obsługa Wczytywania JSON ---
+
+        loadBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+
+                    // Wypełnianie podstawowych pól
+                    form.name.value = data.name || '';
+                    form.surname.value = data.surname || '';
+                    form.address.value = data.address || '';
+                    form.phone.value = data.phone || '';
+                    form.email.value = data.email || '';
+                    form.about.value = data.about || '';
+                    form.experience.value = data.experience || '';
+                    form.interests.value = data.interests || '';
+                    form.languages.value = data.languages || '';
+
+                    // Wypełnianie sekcji Wykształcenie (nowe pola)
+                    form.educationYears.value = data.educationYears || '';
+                    form.university.value = data.university || '';
+                    form.educationField.value = data.educationField || '';
+
+                    // Wypełnianie Umiejętności i Certyfikatów (dynamiczne listy)
+                    skillManager.setItems(data.skills);
+                    certManager.setItems(data.certificates);
+
+                    // Wypełnienie RODO
+                    form.rodo.checked = data.rodo === true || data.rodo === 'on';
+
+                } catch (err) {
+                    alert("Błąd przy wczytywaniu JSON: " + err.message);
+                }
+            };
+            reader.readAsText(file);
+        });
+    </script>
 </body>
 </html>
