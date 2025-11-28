@@ -166,7 +166,7 @@
         <ul>
           <li><i class="fa-solid fa-envelope"></i>{{EMAIL}}</li>
           <li><i class="fa-solid fa-phone"></i>{{PHONE}}</li>
-          <li><i class="fa-solid fa-location-dot"></i> Warszawa, Polska</li>
+          <li><i class="fa-solid fa-location-dot"></i> {{ADDRESS}}</li>
         </ul>
       </div>
 
@@ -227,13 +227,15 @@
 
       <section class="education">
         <h3>WYKSZTAŁCENIE</h3>
-        <div class="school">{{EDUCATION}}</div>
+        <div class="school">{{EDUCATIONYEARS}}</div>
+        <br>
+        {{UNIVERSITY}}
       </section>
 
       <section class="life">
         <h3>ZAINTERESOWANIA</h3>
         <div class="hobby">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique provident, ab facilis, fugiat vero earum eum eaque quaerat, optio laudantium consequatur cupiditate officiis ipsum hic! Omnis veniam vero earum fugit.</p>
+          <p>{{INTERESTS}}</p>
         </div>
       </section>
     </main>
