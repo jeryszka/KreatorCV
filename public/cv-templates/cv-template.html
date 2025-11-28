@@ -1,1 +1,246 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #e9eef1;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .cv-container {
+      width: 210mm;
+      height: 297mm;
+      display: flex;
+      background-color: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Lewa kolumna */
+    .sidebar {
+      width: 35%;
+      background-color: #000a24;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      height: 100%;
+    }
+
+    .photo {
+      width: 130px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      padding: 40px 0;
+    }
+
+    .photo img {
+      width: 120px;
+      height: auto;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .contact, .skills, .languages, .certificat {
+      width: 80%;
+      margin-top: 25px;
+    }
+
+    .contact h3, .skills h3, .languages h3, .certificat h3 {
+      border-bottom: 2px solid #fffafade;
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #fffafade;
+    }
+
+    .contact ul, .skills ul, .languages ul, .certificat ul {
+      list-style: none;
+    }
+
+    .contact li, .skills li, .languages li, .certificat li {
+      font-size: 13px;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .contact i {
+      color: #19596c;
+      margin-right: 8px;
+    }
+
+    /* Prawa kolumna */
+    .main-content {
+      width: 65%;
+      margin-left: 10px;
+    }
+
+    .header {
+      background-color: #ffffffd3;
+      color: #000000e7;
+      padding: 30px;
+    }
+
+    #paragraf1 {
+      margin-top: 10px;
+      width: 90%;
+      display: flex;
+    }
+
+    .header h1 {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .header h2 {
+      font-size: 13px;
+      margin-top: 5px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    section {
+      margin-top: 25px;
+      margin-left: 5px;
+    }
+
+    section h3 {
+      border-bottom: 2px solid #000000e7;
+      font-size: 15px;
+      margin-bottom: 15px;
+      color: #000000e7;
+      width: 90%;
+    }
+
+    .job, .school, .hobby {
+      margin-bottom: 15px;
+    }
+
+    .job h4, .school h4 {
+      font-size: 14px;
+      font-weight: bold;
+      color: #000000e7;
+    }
+
+    .job span, .school span {
+      font-size: 12px;
+      color: #000000e7;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .job p, .school p, .hobby p {
+      font-size: 13px;
+      color: #000000e7;
+      width: 90%;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="cv-container">
+
+    <!-- Lewa kolumna -->
+    <aside class="sidebar">
+      <div class="photo">
+        <img src="https://www.dariuszkempny.pl/wp-content/uploads/2022/02/portrety-biznesowe.jpg" alt="photo.jpg" />
+      </div>
+
+      <div class="contact">
+        <h3>KONTAKT</h3>
+        <ul>
+          <li><i class="fa-solid fa-envelope"></i>{{EMAIL}}</li>
+          <li><i class="fa-solid fa-phone"></i>{{PHONE}}</li>
+          <li><i class="fa-solid fa-location-dot"></i> {{ADDRESS}}</li>
+        </ul>
+      </div>
+
+      <div class="skills">
+        <h3>UMIEJĘTNOŚCI</h3>
+        <ul>
+          <li>Obsługa MS Office</li>
+          <li>Organizacja dokumentów</li>
+          <li>Komunikatywność</li>
+          <li>Praca zespołowa</li>
+        </ul>
+      </div>
+
+      <div class="languages">
+        <h3>JĘZYKI OBCE</h3>
+        <ul>
+          <li>Angielski</li>
+          <li>Francuski</li>
+          <li>Hiszpański</li>
+          <li>Włoski</li>
+        </ul>
+      </div>
+
+      <div class="certificat">
+        <h3>CERTYFIKATY</h3>
+        <ul>
+          <li>---</li>
+          <li>---</li>
+          <li>---</li>
+          <li>---</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Prawa kolumna -->
+    <main class="main-content">
+      <header class="header">
+        <h1>{{NAME}} {{SURNAME}}</h1>
+        <h2>SPECJALISTA DS. ADMINISTRACJI</h2>
+        <!-- <p id="paragraf1">{{SURNAME}}</p> -->
+         {{ABOUT}}
+      </header>
+
+      <section class="experience">
+        <h3>DOŚWIADCZENIE</h3>
+        <div class="job">
+          <h4>Specjalista administracyjny – Firma XYZ</h4>
+          <span>2021 – obecnie</span>
+          <p>Obsługa korespondencji, przygotowywanie dokumentów, kontakt z kontrahentami.</p>
+        </div>
+
+        <div class="job">
+          <h4>Asystent biura – Firma ABC</h4>
+          <span>2018 – 2021</span>
+          <p>Wsparcie zespołu administracyjnego, wprowadzanie danych, archiwizacja dokumentów.</p>
+        </div>
+      </section>
+
+      <section class="education">
+        <h3>WYKSZTAŁCENIE</h3>
+        <div class="school">{{EDUCATIONYEARS}}</div>
+        <br>
+        {{UNIVERSITY}}
+      </section>
+
+      <section class="life">
+        <h3>ZAINTERESOWANIA</h3>
+        <div class="hobby">
+          <p>{{INTERESTS}}</p>
+        </div>
+      </section>
+    </main>
+    
+  </div>
+</body>
+</html>
 
