@@ -19,18 +19,21 @@ app.get("/test", (req, res) => {
 
 // GENEROWANIE
 app.post("/generate", (req, res) => {
-    const { name, surname, email, phone, about, education } = req.body;
+    const { name, surname, address, phone, email, about, educationYears, university, interests } = req.body;
     console.log("REQ BODY:", req.body);
     lastData = req.body;
-    const templatePath = path.join(__dirname, "public", "cv-template.html");
+    const templatePath = path.join(__dirname, "public", "cv-templates/cv-template.html");
     let html = fs.readFileSync(templatePath, "utf8");
     html = html
         .replaceAll("{{NAME}}", name || "")
         .replaceAll("{{SURNAME}}", surname || "")
+        .replaceAll("{{ADDRESS}}", address || "")
         .replaceAll("{{EMAIL}}", email || "")
         .replaceAll("{{PHONE}}", phone || "")
         .replaceAll("{{ABOUT}}", about || "")
-        .replaceAll("{{EDUCATION}}", education || "");
+        .replaceAll("{{EDUCATIONYEARS}}", educationYears || "")
+        .replaceAll("{{UNIVERSITY}}", university || "")
+        .replaceAll("{{INTERESTS}}", interests || "" );
 
     // Zapis HTML bez przycisku
     const pdfPath = path.join(__dirname, "public", "generated-cv.pdf.html");
