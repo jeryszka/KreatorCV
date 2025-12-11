@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kreator CV</title>
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kreator CV - Stwórz Profesjonalne CV Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- OGÓLNE STYLES I UKŁAD GRID --- */
         body {
             margin: 0;
-            display: grid;
-            grid-template-rows: 100px 1430px 100px;
+            grid-template-rows: 100px auto 100px;
             grid-template-columns: 1fr;
             min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7f6; /* Lekko złamana biel dla tła */
         }
 
-        menu{
+        /* --- HEADER I MENU (NAPRAWIONE) --- */
+        header {
+            background-color: white;
+            color: #000a24;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Wyśrodkowuje tytuł h1 */
+            position: relative;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
+            height: 100px; /* Zapewnienie stałej wysokości */
+        }
+        
+        /* Pozycjonowanie ikony menu na skraju, bez wpływu na centrowanie h1 */
+        menu {
             position: absolute;
             left: 20px;
             font-size: 2rem;
@@ -22,22 +38,17 @@
             background: none;
             border: none;
             color: #000a24;
+            /* Upewnienie się, że jest idealnie wyśrodkowane pionowo */
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 0; 
+            margin: 0;
+            line-height: 1; /* Korekta wysokości linii dla symbolu */
         }
 
-        header {
-            background-color: white;
-            color: #000a24;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            box-shadow: 0px 10px 15px rgba(255, 255, 255, 0.2);
-        }
-
-        footer{
+        /* --- STOPKA --- */
+        footer {
             background-color: #000a24;
-            font-size: 0.2rem;
             display: flex;
             justify-content: center;
             flex-direction: column;
@@ -45,139 +56,280 @@
             height: 100px;
         }
 
-        #content-container{
+        #footer-text {
+            color: white;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* --- SEKCJA GŁÓWNA (HERO) - NAPRAWIONA --- */
+        #content-container {
             color: #FFFFFF;
             display: grid;
             grid-template-columns: 1fr 1fr;
             background-color: #000a24;
+            padding: 5rem 0; 
         }
 
-        .text{
+        .text {
             display: flex;
             flex-direction: column;
+            align-items: flex-start; 
+            justify-content: center;
+            padding: 2rem 5rem;
+            text-align: left;
+            /* Zwiększenie elastyczności, aby kontener wypełniał przestrzeń */
+            min-height: 400px; 
+        }
+
+        .hero-image {
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 7rem;
+            padding: 2rem;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
         }
 
-        @media (max-width: 768px) {
-        body {
-            grid-template-rows: 200px 1000px 300px;
+        .t1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
         }
-        }
-
-        @media (max-width: 480px) {
-        body {
-            grid-template-rows: 200px 800px 200px;
-        }
-        }
-
-        .t1{
-            font-size: 3rem;
-        }
-
-        .t2{
-            padding: 4rem;
-            font-size: 1.5rem;
-        }
-
-        #anchor-button{
-            color: black;
-            border: none;
-            width: 170px;
-            height: 50px;
-            background-color: #FFFF;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer;
-        }
-
-        #anchor-button:hover{
-            transition: 0.2s;
-            background-color: #4b5770;
-            color: white;
-        }
-
-        menu{
-            z-index: 1;
-        }
-        #CVtemplate-container{
-            grid-column: 1, -1;
-            display: flex;
-            justify-content: center;
-            background-color: white;
-            flex-direction: column;
-        }
-
-        .t3{
-            font-size: 1.5rem;
-        }
-        #text-t3-p{
-            font-size: 2rem;
-        }
-        .t4{
-            color: white;
-            font-size: 2rem;
-            padding: 0;
+        .t1 p {
             margin: 0;
         }
-        #CVtemplates {
-            display: grid; 
-            grid-template-columns: repeat(4, 270px);
-            gap: 20px;
-            width: fit-content; 
-            margin: 0 auto; 
+
+        .t2 {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px; 
+        }
+        
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+        
+        /* NAPRAWIONY PRZYCISK: Upewnienie się, że stoi sam, a nie jest częścią jakiegoś marginesu */
+        #anchor-button {
+            color: #000a24;
+            border: none;
+            width: 220px;
+            height: 60px;
+            background-color: #f7f7f7;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Zapewnienie, że przycisk ma margines tylko poniżej, nie jest sklejony z resztą tekstu */
+            margin-top: 20px; 
         }
 
-        .temp{
+        #anchor-button:hover {
+            background-color: #4b5770;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* --- SEKCJA SZABLONÓW --- */
+        #CVtemplate-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f7f6;
+            color: #000a24;
+            padding: 80px 20px;
+        }
+
+        .template-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #text-t3-p {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .t3 {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            max-width: 800px;
+        }
+
+        #CVtemplates {
+            display: grid;
+            grid-template-columns: repeat(4, 250px);
+            gap: 30px;
+            width: fit-content;
+            margin-top: 20px;
+        }
+
+        .temp {
             width: 250px;
             height: 350px;
-            background-color: rgb(192, 192, 192);
-            cursor: pointer ;
+            background-color: #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s, transform 0.3s;
+            border: 1px solid #c0c0c0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #4b5770;
+            text-decoration: none;
         }
-        .temp:hover{
-            background-color: grey;
+        
+        .temp:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
         }
 
-        #footer-text{
-            color: white;
-            font-size: 1rem;
-            font-weight: normal;
+        /* Druga sekcja korzyści */
+        .benefits-section {
+            background-color: #000a24; 
+            color: white; 
+            padding: 50px 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
         }
-  </style>
+        
+        .benefit-card {
+            padding: 15px; 
+            align-items: center; 
+            text-align: center; 
+            margin: 0; 
+            background: #07173d; 
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* --- MEDIA QUERIES (RESPONSYWNOŚĆ) --- */
+
+        @media (max-width: 1100px) {
+            #CVtemplates {
+                grid-template-columns: repeat(2, 250px);
+            }
+        }
+        @media (max-width: 900px) {
+             #CVtemplates[style*="grid-template-columns: repeat(3, 1fr)"] {
+                grid-template-columns: 1fr;
+                gap: 20px;
+             }
+        }
+        @media (max-width: 768px) {
+            body {
+                grid-template-rows: 80px auto 80px;
+            }
+            #content-container {
+                grid-template-columns: 1fr;
+                padding: 40px 0;
+            }
+            .text {
+                align-items: center; /* Wyrównanie tekstu na środku dla urządzeń mobilnych */
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+            .hero-image {
+                display: none; 
+            }
+            .t1 {
+                font-size: 2.5rem;
+            }
+            #CVtemplates {
+                grid-template-columns: 1fr;
+                width: 80%;
+            }
+            .temp {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header><menu>☰</menu><h1>KREATOR CV</h1></header>
+    <header>
+        <button type="button" aria-label="Menu" style="all: unset;"><menu>☰</menu></button>
+        <h1>KREATOR CV</h1>
+    </header>
     <main>
         <div id="content-container">
-            <div class="text t1"> 
-                <p>Darmowy <br>kreator CV!</p>
-                <a href="#CVtemplate-container"><button id="anchor-button">Stwórz CV</button></a></div>
-            <div class="text t2">
-                <img src="images/CV.jpg" style="border-radius: 15px;">
-             </div>
+            <div class="text"> 
+                <p class="t1">Stwórz Profesjonalne CV <br>w 5 Minut!</p>
+                <div class="description-text">
+                    <p class="t2">Skorzystaj z naszego darmowego i intuicyjnego kreatora, aby szybko przygotować dokument, który zaimponuje rekruterom.</p>
+                    <ul>
+                        <li>Profesjonalne szablony dopasowane do każdej branży.</li>
+                        <li>Wskazówki krok po kroku, aby niczego nie pominąć.</li>
+                        <li>Możliwość pobrania CV w formacie PDF.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/CV.jpg" alt="Przykładowe profesjonalne CV" >
+            </div>
         </div>
+        
         <div id="CVtemplate-container">
-            <div class="text t3 ">
-                <p id="text-t3-p">Darmowe szablony i wzory CV!</p>
-                Dzięki naszej stronie możesz wybrać odpowiadający tobie szablon CV, <br>który pomoże Ci łatwo stworzyć własne CV w ciągu kilku minut.
+            <div class="template-header t3">
+                <p id="text-t3-p">Darmowe Szablony CV, Które Działają!</p>
+                Wybierz jeden z profesjonalnie zaprojektowanych wzorów. Każdy szablon jest w pełni konfigurowalny i zoptymalizowany pod kątem systemów ATS (Automatyczne Systemy Śledzenia Kandydatów).
             </div>
 
             <div id="CVtemplates">
-                <a href="cv-form.html"><div class="temp"></div></a>
-                <div class="temp"></div>
-                <div class="temp"></div>
-                <div class="temp"></div>
+                <a href="cv-form.html?template=1" class="temp">Nowoczesny (domyślny)</a>
+                <a href="cv-form.html?template=2" class="temp">Minimalistyczny</a>
+                <a href="cv-form.html?template=3" class="temp">Kreatywny</a>
+            </div>
+        </div>
+        
+        <div class="benefits-section">
+            <div class="template-header t3" style="color: white;">
+                <p id="text-t3-p" style="color: white;">Dlaczego My? Kluczowe Korzyści</p>
+                Zapewniamy narzędzia, dzięki którym Twoje CV wyróżni się na tle setek innych aplikacji.
+            </div>
+            <div id="CVtemplates" style="grid-template-columns: repeat(3, 1fr); max-width: 900px; width: 100%; margin-top: 0; gap: 20px;">
+                <div class="text t3 benefit-card">
+                    <h4 style="margin-top: 0; font-size: 1.3rem;">🚀 Szybkość i Łatwość</h4>
+                    <p style="margin-bottom: 0;">Wypełnij proste pola i zobacz podgląd w czasie rzeczywistym. Gotowe CV w mniej niż 5 minut.</p>
+                </div>
+                <div class="text t3 benefit-card">
+                    <h4 style="margin-top: 0; font-size: 1.3rem;">✅ Zgodność z ATS</h4>
+                    <p style="margin-bottom: 0;">Nasze szablony są testowane, by bez problemu przejść skanowanie przez systemy rekrutacyjne.</p>
+                </div>
+                <div class="text t3 benefit-card">
+                    <h4 style="margin-top: 0; font-size: 1.3rem;">💯 100% Za Darmo</h4>
+                    <p style="margin-bottom: 0;">Pełny dostęp do wszystkich szablonów i funkcji bez ukrytych opłat i subskrypcji.</p>
+                </div>
             </div>
         </div>
     </main>
     <footer>
-            <h3 id="footer-text">© Kreator CV. Wszystkie prawa zastrzeżone.</h3>
+        <h3 id="footer-text">© Kreator CV 2024. Wszelkie prawa zastrzeżone. | Polityka Prywatności</h3>
     </footer>
     <script>
         const btn = document.getElementById('anchor-button');
         btn.addEventListener('click', function(e) {
-            e.preventDefault(); // blokuje natychmiastowy skok
+            e.preventDefault(); 
             document.querySelector('#CVtemplate-container').scrollIntoView({ behavior: 'smooth' });
         });
     </script>

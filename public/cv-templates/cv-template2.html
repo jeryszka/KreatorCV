@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CV</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     * {
       margin: 0;
@@ -23,11 +24,12 @@
       width: 210mm;
       height: 297mm;
       display: flex;
+      flex-direction: row-reverse;
       background-color: white;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     }
 
-    /* Lewa kolumna */
+    /* Lewa kolumna (po prawej stronie - odbicie lustrzane) */
     .sidebar {
       width: 35%;
       background: linear-gradient(135deg, #000a24 0%, #1a2d4d 100%);
@@ -99,11 +101,10 @@
 
     .contact i {
       color: #4db8ff;
-      /* margin-right: 10px; */
       font-size: 14px;
     }
 
-    /* Prawa kolumna */
+    /* Prawa kolumna (po lewej stronie - odbicie lustrzane) */
     .main-content {
       width: 65%;
       display: flex;
@@ -221,6 +222,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="cv-container">
 
@@ -265,8 +267,7 @@
     <main class="main-content">
       <header class="header">
         <h1>{{NAME}} {{SURNAME}}</h1>
-        <!-- <p id="paragraf1">{{SURNAME}}</p> -->
-         {{ABOUT}}
+        {{ABOUT}}
       </header>
 
       <section class="experience">
@@ -288,6 +289,9 @@
     </main>
     
   </div>
-</body>
-</html>
 
+
+
+</body>
+
+</html>

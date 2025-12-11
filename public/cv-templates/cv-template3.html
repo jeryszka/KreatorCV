@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@300;400;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f4f7f6;
+      display: flex;
+      justify-content: center;
+      padding: 40px 0;
+    }
+
+    /* Kontener CV */
+    .cv-container {
+      width: 210mm;
+      height: 297mm;
+      display: grid;
+      grid-template-columns: 35% 65%;
+      grid-template-rows: auto;
+      grid-template-areas:
+        "photo header"
+        "about-me contacts"
+        "experience skills"
+        "education languages"
+        "interests certificat";
+      background: #ffffff;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+
+    /* Ujednolicone sekcje LEWEJ i PRAWEJ kolumny */
+    .cv-container>*:not(.photo):not(.header) {
+      background: #ffffff;
+      color: #333;
+      padding: 18px 28px;
+    }
+
+    /* zdjęcie */
+    .photo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 240px;
+      background: linear-gradient(135deg, #000a24 0%, #1a2d4d 100%);
+    }
+
+    .photo img {
+      height: 140px;
+      width: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(90deg, #000a24 0%, #1a3a52 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      height: 240px;
+    }
+
+    .header .space {
+      text-align: left;
+      max-width: 75%;
+      margin-left: 30px;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .header h2 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      opacity: 0.9;
+      text-transform: uppercase;
+      color: #4db8ff;
+    }
+
+    /* Nagłówki sekcji */
+    section h3,
+    .contacts h3,
+    .skills h3,
+    .languages h3,
+    .certificat h3,
+    .interests h3 {
+      border-bottom: 2px solid #4db8ff;
+      font-size: 13px;
+      margin-bottom: 12px;
+      color: #000a24;
+      padding-bottom: 6px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .contacts ul,
+    .skills ul,
+    .languages ul,
+    .certificat ul {
+      list-style: none;
+    }
+
+    .contacts li,
+    .skills li,
+    .languages li,
+    .certificat li {
+      font-size: 12px;
+      margin-bottom: 8px;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    .contacts i {
+      color: #4db8ff;
+      margin-right: 10px;
+      width: 16px;
+      text-align: center;
+    }
+
+    /* Paski umiejętności */
+    .skills li {
+      position: relative;
+      list-style: none;
+      padding-left: 20px;
+    }
+
+    .skills li:before {
+      content: "▸";
+      color: #4db8ff;
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    .languages li {
+      position: relative;
+      list-style: none;
+      padding-left: 20px;
+    }
+
+    .languages li:before {
+      content: "▸";
+      color: #4db8ff;
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    .job,
+    .school,
+    .hobby {
+      margin-bottom: 12px;
+    }
+
+    .job h4,
+    .school h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #000a24;
+      margin-bottom: 2px;
+    }
+
+    .job span,
+    .school span {
+      font-size: 11px;
+      color: #4db8ff;
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .job p,
+    .school p,
+    .hobby p {
+      font-size: 12px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .about-me p {
+      font-size: 12px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cv-container">
+    <div class="photo" style="grid-area: photo">
+      <img src="{{PHOTO}}" alt="Zdjęcie profilowe" />
+    </div>
+
+    <header class="header" style="grid-area: header">
+      <div class="space">
+        <h1>{{NAME}} {{SURNAME}}</h1>
+        <h2>{{ABOUT}}</h2>
+      </div>
+    </header>
+
+    <div class="about-me" style="grid-area: about-me">
+      <p>
+        {{ABOUT}}
+      </p>
+    </div>
+
+    <div class="contacts" style="grid-area: contacts">
+      <h3>KONTAKT</h3>
+      <ul>
+        <li><i class="fa-solid fa-envelope"></i> {{EMAIL}}</li>
+        <li><i class="fa-solid fa-phone"></i> {{PHONE}}</li>
+        <li><i class="fa-solid fa-location-dot"></i> {{ADDRESS}}</li>
+      </ul>
+    </div>
+
+    <div class="experience" style="grid-area: experience">
+      <h3>DOŚWIADCZENIE</h3>
+      {{EXPERIENCE}}
+    </div>
+
+    <div class="skills" style="grid-area: skills">
+      <h3>UMIEJĘTNOŚCI</h3>
+      <ul>
+        {{SKILLS}}
+      </ul>
+    </div>
+
+    <div class="education" style="grid-area: education">
+      <h3>WYKSZTAŁCENIE</h3>
+      {{EDUCATION}}
+    </div>
+
+    <div class="languages" style="grid-area: languages">
+      <h3>JĘZYKI OBCE</h3>
+      <ul>
+        {{LANGUAGES}}
+      </ul>
+    </div>
+
+    <div class="interests" style="grid-area: interests">
+      <h3>ZAINTERESOWANIA</h3>
+      <p>{{INTERESTS}}</p>
+    </div>
+
+    <div class="certificat" style="grid-area: certificat">
+      <h3>CERTYFIKATY</h3>
+      <ul>
+        {{CERTIFICATES}}
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

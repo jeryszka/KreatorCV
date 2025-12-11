@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kreator CV</title>
+    <title>Kreator CV - Formularz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* --- STYLES OGÓLNE I UKŁAD --- */
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f4f7f6; /* Złamana biel */
             margin: 0;
             padding: 0;
-            padding-bottom: 20px;
+            padding-bottom: 50px;
         }
+        
+        /* --- HEADER (Dopasowany do index.html) --- */
         header {
             background-color: white;
             color: #000a24;
             font-size: 1rem;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* Wyśrodkowuje tytuł h1 */
             position: relative;
-            box-shadow: 0px 5px 10px rgba(104, 104, 104, 0.2);
-
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
+            height: 100px; /* Zapewnienie stałej wysokości */
         }
         menu{
             position: absolute;
@@ -31,63 +35,83 @@
             background: none;
             border: none;
             color: #000a24;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 0; 
+            margin: 0;
+            line-height: 1;
         }
+        
+        /* --- KONTENER GŁÓWNY --- */
         .container {
-            max-width: 650px; /* Nieco większa szerokość */
+            max-width: 750px; /* Nieco szerszy, aby pomieścić dynamiczne sekcje */
             margin: 40px auto 0 auto;
             background-color: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
         }
+        
+        #formh1 {
+            border-bottom: 3px solid #000a24;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #000a24;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        /* --- ELEMENTY FORMULARZA --- */
         label {
             margin-left: 10px;
             font-weight: 600;
-            margin-top: 15px;
+            margin-top: 20px;
+            margin-bottom: 5px;
             display: block;
             color: #333;
         }
-        input, textarea, select {
+        input:not([type="checkbox"]), textarea, select {
             margin-left: 10px;
             width: 95%;
-            padding: 10px;
+            padding: 12px;
             margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             box-sizing: border-box;
-            transition: border-color 0.3s;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
         input:focus, textarea:focus, select:focus {
             border-color: #000a24;
+            box-shadow: 0 0 0 2px rgba(0, 10, 36, 0.1);
             outline: none;
         }
-        button {
-            margin-top: 20px;
+        
+        /* --- PRZYCISKI GŁÓWNE --- */
+        button[type="submit"], #loadJsonBtn {
+            margin-top: 25px;
             width: 100%;
             background-color: #000a24;
             color: white;
             border: none;
-            padding: 12px;
-            font-size: 17px;
-            border-radius: 6px;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 8px;
             cursor: pointer;
+            font-weight: 600;
             transition: background-color 0.3s;
         }
-        button:hover {
-            background-color: #212530;
+        button[type="submit"]:hover {
+            background-color: #07173d;
         }
         #loadJsonBtn {
-            margin-top: 10px;
             background-color: #3f51b5;
         }
         #loadJsonBtn:hover {
             background-color: #303f9f;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-        /* Style dla pól dynamicznych (Umiejętności i Certyfikaty) */
+        /* --- STYLY DYNAMICZNE (Tagi/Umiejętności) --- */
         .dynamic-input-group {
             display: flex;
             align-items: center;
@@ -104,26 +128,28 @@
             margin: 0 0 0 10px;
             padding: 10px;
             font-size: 14px;
+            background-color: #000a24;
+            border-radius: 8px;
         }
-        
+        .dynamic-input-group button:hover {
+            background-color: #07173d;
+        }
         .tag-list {
             list-style: none;
             padding: 0;
             margin-top: 10px;
             margin-left: 10px;
         }
-
         .tag-item {
             display: inline-block;
             background-color: #e0e7ff; 
             color: #000a24;
             padding: 5px 10px;
             border-radius: 4px;
-            margin-right: 5px;
-            margin-bottom: 5px;
+            margin-right: 8px;
+            margin-bottom: 8px;
             font-size: 0.9em;
         }
-
         .tag-item button {
             background: none;
             border: none;
@@ -135,34 +161,84 @@
             font-size: 1em;
             width: auto;
         }
-        
-        /* Styl dla sekcji RODO */
+
+        /* --- SEKCJE DYNAMICZNE (Doświadczenie, Wykształcenie) --- */
+        .dynamic-section-wrapper {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+        .section-header {
+            font-size: 1.4rem;
+            color: #000a24;
+            font-weight: 700;
+            margin-top: 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            margin-left: 0;
+        }
+        .add-item-button {
+            width: 100%;
+            background-color: #000a24;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .add-item-button:hover {
+            background-color: #07173d;
+        }
+        .item-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background-color: white;
+            position: relative;
+        }
+        .remove-item-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8em;
+            width: auto;
+        }
+        .remove-item-btn:hover {
+            background-color: #cc0000;
+        }
+
+        /* --- RODO --- */
         .rodo-consent {
-            margin-top: 25px;
+            margin-top: 30px;
             padding: 15px;
             border: 1px dashed #ccc;
             border-radius: 8px;
             background-color: #fafafa;
         }
-
         .rodo-consent input[type="checkbox"] {
             width: auto;
             margin-right: 10px;
             margin-left: 0;
         }
-
         .rodo-consent label {
             display: inline;
             font-weight: normal;
         }
 
-        #formh1
-        {
-            border-bottom: 3px solid #000a24;
-            text-align: center;
-            margin-bottom: 30px;
-            color: #000a24;
-            padding-bottom: 10px;
+        #addSkillBtn, #addCertBtn {
+            color: white;
         }
     </style>
 </head>
@@ -177,99 +253,132 @@
     <div class="container">
         <h1 id="formh1">Formularz CV</h1>
 
-        <form id="cvForm" action="/generate" method="POST">
-            <div class="form-group">
-                <label>Imię:</label>
-                <input type="text" name="name" required>
+        <form id="cvForm" method="POST" enctype="multipart/form-data">
+            
+            <div class="dynamic-section-wrapper" style="background-color: #e0e7ff40;">
+                <h2 class="section-header">Wybór Szablonu</h2>
+                <div class="form-group">
+                    <label for="templateSelect">Wybierz szablon CV:</label>
+                    <select name="template" id="templateSelect" style="width: 95%; padding: 12px; margin-left: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px;">
+                        <option value="1">Nowoczesny (domyślny)</option>
+                        <option value="2">Minimalistyczny</option>
+                        <option value="3">Kreatywny</option>
+                    </select>
+                </div>
             </div>
             
-            <div class="form-group">
-                <label>Nazwisko:</label>
-                <input type="text" name="surname" required>
-            </div>
-
-            <div class="form-group">
-                <label>Adres (Miasto, Kod Pocztowy):</label>
-                <input type="text" name="address" placeholder="Np. Kraków, 30-001">
-            </div>
-
-            <div class="form-group">
-                <label>Telefon:</label>
-                <input type="tel" name="phone" required>
-            </div>
-
-            <div class="form-group">
-                <label>Email:</label>
-                <input type="email" name="email" required>
-            </div>
-
-            <div class="form-group">
-                <label>O mnie / Podsumowanie zawodowe:</label>
-                <textarea name="about" rows="4" required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="educationYears">Lata nauki:</label>
-                <input type="text" name="educationYears" placeholder="Np. 2018-2023">
-            </div>
-
-            <div class="form-group">
-                <label for="universitySelect">Uczelnia:</label>
-                <select id="universitySelect" name="university">
-                    <option value="">Wybierz uczelnię...</option>
-                    <option value="AGH (Akademia Górniczo-Hutnicza)">AGH (Akademia Górniczo-Hutnicza)</option>
-                    <option value="Politechnika Warszawska">Politechnika Warszawska</option>
-                    <option value="Uniwersytet Jagielloński">Uniwersytet Jagielloński</option>
-                    <option value="Uniwersytet Warszawski">Uniwersytet Warszawski</option>
-                    <option value="Politechnika Wrocławska">Politechnika Wrocławska</option>
-                    <option value="Politechnika Gdańska">Politechnika Gdańska</option>
-                    <option value="Inna/Szkoła Średnia">Inna/Szkoła Średnia</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="educationField">Kierunek/Wydział:</label>
-                <input type="text" name="educationField" placeholder="Np. Informatyka Stosowana">
-            </div>
-
-            <div class="form-group">
-                <label>Doświadczenie zawodowe (Firma, Stanowisko, Zakres obowiązków, Lata):</label>
-                <textarea name="experience" rows="5" placeholder="Np. 2023-obecnie: Firma XYZ, Junior Developer, Tworzenie stron internetowych..."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Umiejętności (np. twarde i miękkie):</label>
-                <div class="dynamic-input-group">
-                    <input type="text" id="skillInput" placeholder="Wpisz umiejętność (np. Python, Zarządzanie Czasem)">
-                    <button type="button" id="addSkillBtn">Dodaj</button>
+            <div class="dynamic-section-wrapper" style="background-color: #e0e7ff40;">
+                <h2 class="section-header">Dane Kontaktowe i Zdjęcie</h2>
+                
+                <div class="form-group">
+                    <label>Zdjęcie profilowe (opcjonalnie):</label>
+                    <input type="file" name="photo" accept="image/*" style="width: 95%;">
                 </div>
-                <ul id="skillsList" class="tag-list"></ul>
-                <input type="hidden" name="skills" id="skillsHidden">
+
+                <div class="form-group">
+                    <label>Imię:</label>
+                    <input type="text" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Nazwisko:</label>
+                    <input type="text" name="surname" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Adres (Miasto, Kod Pocztowy):</label>
+                    <input type="text" name="address" placeholder="Np. Kraków, 30-001">
+                </div>
+
+                <div class="form-group">
+                    <label>Telefon:</label>
+                    <input type="tel" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Link do LinkedIn (opcjonalnie):</label>
+                    <input type="url" name="linkedin" placeholder="https://www.linkedin.com/in/twojeimie">
+                </div>
+                
+                <div class="form-group">
+                    <label>Link do Portfolio/GitHub (opcjonalnie):</label>
+                    <input type="url" name="portfolio" placeholder="https://www.twojeportfolio.com">
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Certyfikaty/Kursy (Nazwa, Instytucja, Rok):</label>
-                <div class="dynamic-input-group">
-                    <input type="text" id="certificateInput" placeholder="Wpisz certyfikat (np. AWS Certified Developer - 2024)">
-                    <button type="button" id="addCertBtn">Dodaj</button>
+            <div class="dynamic-section-wrapper">
+                <h2 class="section-header">Podsumowanie Zawodowe</h2>
+                <div class="form-group">
+                    <label>O mnie / Podsumowanie zawodowe:</label>
+                    <textarea name="about" rows="4" required placeholder="Napisz krótko (3-5 zdań) o swoich najważniejszych osiągnięciach i celach zawodowych."></textarea>
                 </div>
-                <ul id="certList" class="tag-list"></ul>
-                <input type="hidden" name="certificates" id="certificatesHidden">
+            </div>
+
+
+            <div class="dynamic-section-wrapper">
+                <h2 class="section-header">Doświadczenie Zawodowe</h2>
+                <div id="experienceItems">
+                    </div>
+                <button type="button" class="add-item-button" data-section="experience">➕ Dodaj nowe stanowisko</button>
+                <input type="hidden" name="experience_data" id="experienceHidden">
             </div>
             
-            <div class="form-group">
-                <label for="languageSelect">Języki obce:</label>
-                <select name="languages" id="languageSelect">
-                    <option value="">Wybierz język i poziom...</option>
-                    <option value="Angielski (B2)">Angielski (B2)</option>
-                    <option value="Niemiecki (A1)">Niemiecki (A1)</option>
-                    <option value="Hiszpański (C1)">Hiszpański (C1)</option>
-                </select>
+            <div class="dynamic-section-wrapper">
+                <h2 class="section-header">Wykształcenie</h2>
+                <div id="educationItems">
+                    </div>
+                <button type="button" class="add-item-button" data-section="education">➕ Dodaj nową pozycję edukacyjną</button>
+                <input type="hidden" name="education_data" id="educationHidden">
             </div>
 
-            <div class="form-group">
-                <label>Zainteresowania:</label>
-                <textarea name="interests" rows="2" placeholder="Np. Wspinaczka, fotografia, literatura science-fiction..."></textarea>
+
+            <div class="dynamic-section-wrapper">
+                <h2 class="section-header">Umiejętności i Certyfikaty</h2>
+                
+                <div class="form-group">
+                    <label>Umiejętności (np. twarde i miękkie):</label>
+                    <div class="dynamic-input-group">
+                        <input type="text" id="skillInput" placeholder="Wpisz umiejętność (np. Python, Zarządzanie Czasem)">
+                        <button type="button" id="addSkillBtn">Dodaj</button>
+                    </div>
+                    <ul id="skillsList" class="tag-list"></ul>
+                    <input type="hidden" name="skills" id="skillsHidden">
+                </div>
+
+                <div class="form-group">
+                    <label>Certyfikaty/Kursy:</label>
+                    <div class="dynamic-input-group">
+                        <input type="text" id="certificateInput" placeholder="Wpisz certyfikat (np. AWS Certified Developer - 2024)">
+                        <button type="button" id="addCertBtn">Dodaj</button>
+                    </div>
+                    <ul id="certList" class="tag-list"></ul>
+                    <input type="hidden" name="certificates" id="certificatesHidden">
+                </div>
+            </div>
+
+            <div class="dynamic-section-wrapper">
+                <h2 class="section-header">Inne Informacje</h2>
+                
+                <div class="form-group">
+                    <label for="languageSelect">Języki obce (dodaj je jako tagi lub wybierz poniżej):</label>
+                    <select name="languages" id="languageSelect">
+                        <option value="">Wybierz język i poziom...</option>
+                        <option value="Angielski (B2)">Angielski (B2)</option>
+                        <option value="Niemiecki (A1)">Niemiecki (A1)</option>
+                        <option value="Hiszpański (C1)">Hiszpański (C1)</option>
+                        <option value="Francuski (native)">Francuski (native)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Zainteresowania:</label>
+                    <textarea name="interests" rows="2" placeholder="Np. Wspinaczka, fotografia, literatura science-fiction..."></textarea>
+                </div>
             </div>
             
             <div class="rodo-consent">
@@ -285,12 +394,28 @@
     </div>
 
     <script>
+        // =======================================================
+        // 0. DETEKTOWANIE SZABLONU Z URL I PRESELEKTOWANIE
+        // =======================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const templateParam = urlParams.get('template');
+            
+            if (templateParam) {
+                const templateSelect = document.getElementById('templateSelect');
+                if (templateSelect) {
+                    templateSelect.value = templateParam;
+                }
+            }
+        });
+
+        const form = document.getElementById('cvForm');
         const loadBtn = document.getElementById('loadJsonBtn');
         const fileInput = document.getElementById('jsonFileInput');
-        const form = document.getElementById('cvForm');
 
-        // --- Funkcja do zarządzania listami dynamicznymi (Umiejętności i Certyfikaty) ---
-
+        // =======================================================
+        // 1. ZARZĄDZANIE LISTAMI DYNAMICZNYMI (Umiejętności/Certyfikaty)
+        // =======================================================
         function setupDynamicList(addButtonId, inputId, listId, hiddenInputId) {
             const addButton = document.getElementById(addButtonId);
             const inputField = document.getElementById(inputId);
@@ -303,38 +428,39 @@
                 currentItems.forEach((item, index) => {
                     const listItem = document.createElement('li');
                     listItem.className = 'tag-item';
-                    listItem.innerHTML = `${item} <button type="button" data-index="${index}">x</button>`;
+                    // Używamy data-index do usuwania
+                    listItem.innerHTML = `${item} <button type="button" class="remove-tag-btn" data-index="${index}">x</button>`;
                     listElement.appendChild(listItem);
                 });
                 hiddenInput.value = currentItems.join('; '); // Aktualizacja ukrytego pola
             }
 
-            addButton.addEventListener('click', () => {
+            const addItem = () => {
                 const itemValue = inputField.value.trim();
                 if (itemValue && !currentItems.includes(itemValue)) {
                     currentItems.push(itemValue);
                     renderList();
-                    inputField.value = ''; // Reset input
+                    inputField.value = '';
                 }
-            });
+            };
 
-            // Obsługa klawisza Enter w polu tekstowym
+            addButton.addEventListener('click', addItem);
+
             inputField.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
-                    e.preventDefault(); // Zapobiega wysłaniu formularza
-                    addButton.click();
+                    e.preventDefault();
+                    addItem();
                 }
             });
 
             listElement.addEventListener('click', (e) => {
-                if (e.target.tagName === 'BUTTON') {
+                if (e.target.classList.contains('remove-tag-btn')) {
                     const indexToRemove = parseInt(e.target.getAttribute('data-index'));
                     currentItems.splice(indexToRemove, 1);
                     renderList();
                 }
             });
 
-            // Zewnętrzna funkcja do ustawiania danych (używana przy wczytywaniu JSON)
             return {
                 setItems: (items) => {
                     currentItems = Array.isArray(items) ? items : (items ? items.split(';').map(s => s.trim()).filter(s => s.length > 0) : []);
@@ -344,12 +470,189 @@
             };
         }
 
-        // Inicjalizacja list dynamicznych
         const skillManager = setupDynamicList('addSkillBtn', 'skillInput', 'skillsList', 'skillsHidden');
         const certManager = setupDynamicList('addCertBtn', 'certificateInput', 'certList', 'certificatesHidden');
 
 
-        // --- Obsługa Wczytywania JSON ---
+        // =======================================================
+        // 2. ZARZĄDZANIE DYNAMICZNYMI SEKCJAMI (Doświadczenie/Wykształcenie)
+        // =======================================================
+
+        function setupComplexDynamicSection(sectionId, hiddenInputId, templateGenerator) {
+            const container = document.getElementById(sectionId);
+            const hiddenInput = document.getElementById(hiddenInputId);
+            let items = [];
+            let currentId = 0;
+
+            const renderSection = () => {
+                container.innerHTML = '';
+                items.forEach(item => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'item-card';
+                    itemCard.setAttribute('data-id', item.id);
+                    itemCard.innerHTML = templateGenerator(item);
+                    container.appendChild(itemCard);
+                });
+                updateHiddenInput();
+            };
+
+            const updateHiddenInput = () => {
+                // Konwersja danych z formularza do struktury JSON i zapisanie w ukrytym polu
+                const currentData = Array.from(container.querySelectorAll('.item-card')).map(card => {
+                    const inputs = card.querySelectorAll('input, textarea, select');
+                    const item = { id: card.getAttribute('data-id') };
+                    inputs.forEach(input => {
+                        item[input.name.replace(/\[\d+\]/, '')] = input.value;
+                    });
+                    return item;
+                });
+                hiddenInput.value = JSON.stringify(currentData);
+            };
+
+            const addItem = (data = {}) => {
+                const id = currentId++;
+                const newItem = { id, ...data };
+                items.push(newItem);
+                renderSection();
+            };
+
+            container.addEventListener('input', updateHiddenInput);
+            container.addEventListener('click', (e) => {
+                if (e.target.classList.contains('remove-item-btn')) {
+                    const itemId = parseInt(e.target.closest('.item-card').getAttribute('data-id'));
+                    items = items.filter(item => item.id !== itemId);
+                    renderSection();
+                }
+            });
+            
+            // Funkcja do wczytywania danych z JSON
+            const loadItems = (data) => {
+                items = [];
+                currentId = 0;
+                if (Array.isArray(data)) {
+                    data.forEach(itemData => {
+                        const id = currentId++;
+                        items.push({ id, ...itemData });
+                    });
+                }
+                renderSection();
+            };
+            
+            return { addItem, loadItems };
+        }
+
+        // Szablon dla Doświadczenia Zawodowego
+        const experienceTemplate = (data) => `
+            <button type="button" class="remove-item-btn">Usuń</button>
+            <div class="form-group">
+                <label>Stanowisko:</label>
+                <input type="text" name="role" value="${data.role || ''}" required placeholder="Np. Junior Frontend Developer">
+            </div>
+            <div class="form-group">
+                <label>Firma:</label>
+                <input type="text" name="company" value="${data.company || ''}" required placeholder="Np. Firma XYZ Sp. z o.o.">
+            </div>
+            <div class="form-group">
+                <label>Lata / Okres zatrudnienia:</label>
+                <input type="text" name="years" value="${data.years || ''}" placeholder="Np. 2022-obecnie">
+            </div>
+            <div class="form-group">
+                <label>Zakres obowiązków / Osiągnięcia:</label>
+                <textarea name="description" rows="3" placeholder="Opis najważniejszych zadań lub sukcesów (użyj myślników/listy dla lepszej czytelności).">${data.description || ''}</textarea>
+            </div>
+        `;
+
+        // Szablon dla Wykształcenia
+        const educationTemplate = (data) => `
+            <button type="button" class="remove-item-btn">Usuń</button>
+            <div class="form-group">
+                <label>Tytuł/Stopień:</label>
+                <input type="text" name="degree" value="${data.degree || ''}" placeholder="Np. Magister, Licencjat, Technik">
+            </div>
+            <div class="form-group">
+                <label>Kierunek/Wydział:</label>
+                <input type="text" name="field" value="${data.field || ''}" required placeholder="Np. Informatyka Stosowana">
+            </div>
+            <div class="form-group">
+                <label>Uczelnia/Instytucja:</label>
+                <input type="text" name="institution" value="${data.institution || ''}" required placeholder="Np. Politechnika Warszawska">
+            </div>
+            <div class="form-group">
+                <label>Lata nauki:</label>
+                <input type="text" name="years" value="${data.years || ''}" placeholder="Np. 2018-2023">
+            </div>
+        `;
+        
+        // Inicjalizacja sekcji dynamicznych
+        const experienceManager = setupComplexDynamicSection('experienceItems', 'experienceHidden', experienceTemplate);
+        const educationManager = setupComplexDynamicSection('educationItems', 'educationHidden', educationTemplate);
+
+        // Przypięcie przycisków "Dodaj" do managerów
+        document.querySelectorAll('.add-item-button').forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.dataset.section === 'experience') {
+                    experienceManager.addItem();
+                } else if (button.dataset.section === 'education') {
+                    educationManager.addItem();
+                }
+            });
+        });
+
+        // Dodanie początkowych, pustych pól, aby formularz nie był pusty
+        experienceManager.addItem({ role: '', company: '', years: '', description: '' });
+        educationManager.addItem({ degree: '', field: '', institution: '', years: '' });
+        
+        // =======================================================
+        // 4. OBSŁUGA SUBMITU FORMULARZA
+        // =======================================================
+        
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            
+            // Zebranie wszystkich danych formularza
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Obsługa zdjęcia - konwersja do base64
+            const photoInput = form.querySelector('input[name="photo"]');
+            if (photoInput && photoInput.files && photoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    data.photo = e.target.result; // base64 string
+                    sendFormData(data);
+                };
+                reader.readAsDataURL(photoInput.files[0]);
+            } else {
+                sendFormData(data);
+            }
+            
+            function sendFormData(finalData) {
+                // Wysłanie danych jako JSON
+                fetch('/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(finalData)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/preview';
+                    } else {
+                        alert('Błąd podczas generowania CV');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Błąd: ' + error.message);
+                });
+            }
+        });
+        
+        
+        // =======================================================
+        // 3. OBSŁUGA WCZYTYWANIA JSON (dostosowana do nowych struktur)
+        // =======================================================
 
         loadBtn.addEventListener('click', () => {
             fileInput.click();
@@ -364,27 +667,27 @@
                 try {
                     const data = JSON.parse(e.target.result);
 
-                    // Wypełnianie podstawowych pól
+                    // A. Dane kontaktowe i linki
                     form.name.value = data.name || '';
                     form.surname.value = data.surname || '';
                     form.address.value = data.address || '';
                     form.phone.value = data.phone || '';
                     form.email.value = data.email || '';
+                    form.linkedin.value = data.linkedin || '';
+                    form.portfolio.value = data.portfolio || '';
                     form.about.value = data.about || '';
-                    form.experience.value = data.experience || '';
-                    form.interests.value = data.interests || '';
-                    form.languages.value = data.languages || '';
+                    
+                    // B. Sekcje Dynamiczne (Doświadczenie, Wykształcenie)
+                    experienceManager.loadItems(data.experience);
+                    educationManager.loadItems(data.education);
 
-                    // Wypełnianie sekcji Wykształcenie (nowe pola)
-                    form.educationYears.value = data.educationYears || '';
-                    form.university.value = data.university || '';
-                    form.educationField.value = data.educationField || '';
-
-                    // Wypełnianie Umiejętności i Certyfikatów (dynamiczne listy)
+                    // C. Umiejętności/Certyfikaty (tagi)
                     skillManager.setItems(data.skills);
                     certManager.setItems(data.certificates);
 
-                    // Wypełnienie RODO
+                    // D. Inne
+                    form.languages.value = data.languages || '';
+                    form.interests.value = data.interests || '';
                     form.rodo.checked = data.rodo === true || data.rodo === 'on';
 
                 } catch (err) {
