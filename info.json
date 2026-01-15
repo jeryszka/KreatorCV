@@ -1,0 +1,48 @@
+{
+  "name": "Anna",
+  "surname": "Kowalska",
+  "address": "Kraków, 30-001",
+  "phone": "500 123 456",
+  "email": "anna.kowalska@wp.pl",
+  "linkedin": "https://www.linkedin.com/in/annakowalska-dev",
+  "portfolio": "https://www.annakowalska-portfolio.com",
+  "about": "Doświadczona specjalistka ds. marketingu cyfrowego z 5-letnim stażem. Skutecznie realizuję kampanie, które zwiększają świadomość marki i generują wysokiej jakości leady. Pasjonatka analityki danych i optymalizacji konwersji.",
+  
+  "experience": [
+    {
+      "role": "Starszy Specjalista ds. Marketingu",
+      "company": "TechSolutions Sp. z o.o.",
+      "years": "2022 - obecnie",
+      "description": "- Zarządzanie i optymalizacja budżetu reklamowego Google Ads i Social Media (ponad 50 tys. PLN/miesiąc).\r\n- Wzrost współczynnika konwersji na stronie o 15% poprzez testy A/B i analizę ścieżki użytkownika.\r\n- Prowadzenie zespołu 3 Junior Marketing Managerów."
+    },
+    {
+      "role": "Specjalista ds. Content Marketingu",
+      "company": "Kreatywna Agencja",
+      "years": "2019 - 2022",
+      "description": "- Tworzenie strategii treści dla 10 kluczowych klientów z branży IT.\r\n- Wdrożenie newslettera, który zwiększył zaangażowanie o 25%.\r\n- Optymalizacja SEO ponad 100 artykułów, co przyczyniło się do wzrostu ruchu organicznego."
+    }
+  ],
+  
+  "education": [
+    {
+      "degree": "Magister",
+      "field": "Marketing i Zarządzanie",
+      "institution": "Uniwersytet Ekonomiczny w Krakowie",
+      "years": "2018 - 2020"
+    },
+    {
+      "degree": "Licencjat",
+      "field": "Informatyka Stosowana",
+      "institution": "Politechnika Krakowska",
+      "years": "2015 - 2018"
+    }
+  ],
+  
+  "skills": "Strategie marketingowe; Google Analytics; SEO; SEM; Zarządzanie projektami; Copywriting; Komunikacja; Myślenie analityczne",
+  "certificates": "Google Ads Search Certification - 2024",
+  
+  "languages": "Angielski (B2)",
+  "interests": "Fotografia uliczna, bieganie długodystansowe, literatura faktu o psychologii behawioralnej.",
+  
+  "rodo": true
+}
