@@ -68,6 +68,8 @@ app.post("/generate", (req, res) => {
         templateFilename = "cv-template2.html";
     } else if (templateNumber === "3") {
         templateFilename = "cv-template3.html";
+    } else if (templateNumber === "4") {
+        templateFilename = "cv-template4.html";
     }
     
     const templatePath = path.join(__dirname, "public", "cv-templates", templateFilename);
@@ -81,7 +83,7 @@ app.post("/generate", (req, res) => {
         <div class="job">
             <h4>${exp.role || ''} – ${exp.company || ''}</h4>
             <span>${exp.years || ''}</span>
-            <p>${exp.description || ''}</p>
+            <p>${(exp.description || '').replace(/\n/g, '<br>')}</p>
         </div>
     `).join('');
     
@@ -110,13 +112,13 @@ app.post("/generate", (req, res) => {
         .replaceAll("{{PHONE}}", phone || "")
         .replaceAll("{{LINKEDIN}}", linkedin || "")
         .replaceAll("{{PORTFOLIO}}", portfolio || "")
-        .replaceAll("{{ABOUT}}", about || "")
+        .replaceAll("{{ABOUT}}", (about || "").replace(/\n/g, "<br>"))
         .replaceAll("{{EXPERIENCE}}", experienceHTML)
         .replaceAll("{{EDUCATION}}", educationHTML)
         .replaceAll("{{SKILLS}}", skillsHTML)
         .replaceAll("{{CERTIFICATES}}", certificatesHTML)
-        .replaceAll("{{LANGUAGES}}", languages || "")
-        .replaceAll("{{INTERESTS}}", interests || "" )
+        .replaceAll("{{LANGUAGES}}", (languages || "").replace(/\n/g, "<br>"))
+        .replaceAll("{{INTERESTS}}", (interests || "").replace(/\n/g, "<br>"))
         .replaceAll("{{PHOTO}}", photoData);
 
     // Zapis HTML bez przycisku
@@ -128,7 +130,7 @@ app.post("/generate", (req, res) => {
         "<body>",
         `<body style="background-color: #f4f7f6; padding-top: 140px; padding-bottom: 160px;">
         <header style="position: fixed; top: 0; left: 0; right: 0; background-color: white; color: #000a24; display: flex; align-items: center; justify-content: center; height: 100px; box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05); z-index: 1000;">
-            <h1 style="margin: 0; font-size: 1.8rem; font-weight: 700; letter-spacing: 0.5px;">KREATOR CV</h1>
+            <h1 style="margin: 0; font-size: 2rem; font-weight: 700; letter-spacing: 0.5px;">KREATOR CV</h1>
             <a href="/cv-form.html" style="position: absolute; left: 20px; font-size: 2rem; cursor: pointer; color: #000a24; text-decoration: none; top: 50%; transform: translateY(-50%); padding: 0; margin: 0; line-height: 1;">
                 <svg width="35px" height="35px" viewBox="-18.19 -18.19 112.18 112.18" xmlns="http://www.w3.org/2000/svg" fill="#000a24" stroke="#000a24" stroke-width="7.580299999999999"><path d="M660.313,383.588a1.5,1.5,0,0,1,1.06,2.561l-33.556,33.56a2.528,2.528,0,0,0,0,3.564l33.556,33.558a1.5,1.5,0,0,1-2.121,2.121L625.7,425.394a5.527,5.527,0,0,1,0-7.807l33.556-33.559A1.5,1.5,0,0,1,660.313,383.588Z" fill="#000a24" transform="translate(-624.082 -383.588)"></path></svg>
             </a>

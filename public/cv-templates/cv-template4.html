@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 16px;
+      }
+
+      body {
+        background-color: #e9eef1;
+        display: flex;
+        justify-content: center;
+        padding: 20px 0;
+      }
+
+      .cv-container {
+        width: 210mm;
+        height: 297mm;
+        display: grid;
+        grid-template-columns: 35% 65%;
+        background: #ffffff;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+      }
+
+      .left-column,
+      .right-column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ZDJĘCIE */
+      .photo {
+        height: 300px;
+        background: linear-gradient(135deg, #000a24 0%, #1a2d4d 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .photo img {
+        height: 150px;
+        width: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      /* HEADER */
+      .header {
+        height: 300px;
+        background: linear-gradient(90deg, #000a24 0%, #1a3a52 100%);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        padding: 48px 40px;
+      }
+
+      .header h1 {
+        font-size: 36px;
+        letter-spacing: 2px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      .header h2 {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #4db8ff;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+
+      .dotted-line {
+        border-bottom: 2px dotted #4db8ff;
+        margin: 20px 0;
+      }
+
+      /* SEKCJE – WIĘCEJ POWIETRZA */
+      .section {
+        padding: 34px 36px;
+      }
+
+      .section + .section {
+        margin-top: 18px;
+      }
+
+      /* NAGŁÓWKI – BEZ PODKREŚLEŃ */
+      .about-me h3,
+      .skills h3,
+      .education h3,
+      .interests h3,
+      .experience h3,
+      .certificat h3,
+      .languages h3 {
+        font-size: 14px;
+        margin-bottom: 20px;
+        color: #000a24;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      /* KONTAKT */
+      .contacts ul {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .contacts li {
+        font-size: 12px;
+        color: #ffffff;
+        line-height: 1.6;
+      }
+
+      .contacts i {
+        color: #4db8ff;
+        margin-right: 10px;
+        width: 16px;
+        text-align: center;
+      }
+
+      /* LISTY */
+      .skills ul,
+      .languages ul,
+      .certificat ul {
+        list-style: none;
+      }
+
+      .skills li,
+      .languages li,
+      .certificat li {
+        font-size: 13px;
+        margin-bottom: 14px;
+        color: #333;
+        line-height: 1.7;
+        position: relative;
+        padding-left: 20px;
+      }
+
+      .skills li:before,
+      .languages li:before,
+      .certificat li:before {
+        content: "▸";
+        color: #4db8ff;
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+      }
+
+      /* DOŚWIADCZENIE / EDUKACJA */
+      .job,
+      .school {
+        margin-bottom: 26px;
+      }
+
+      .job h4,
+      .school h4 {
+        font-size: 14px;
+        font-weight: 700;
+        color: #000a24;
+        margin-bottom: 6px;
+      }
+
+      .job span,
+      .school span {
+        font-size: 12px;
+        color: #4db8ff;
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+
+      .job p,
+      .school p,
+      .about-me p,
+      .interests p {
+        font-size: 13px;
+        color: #333;
+        line-height: 1.8;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      @media print {
+        * {
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          margin: 0;
+          padding: 0;
+          background: none;
+        }
+
+        .cv-container {
+          box-shadow: none;
+          width: 210mm;
+          height: 297mm;
+          margin: 0;
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="cv-container">
+      <!-- LEWA -->
+      <div class="left-column">
+        <div class="photo">
+          <img src="{{PHOTO}}" alt="Zdjęcie profilowe" />
+        </div>
+
+        <div class="about-me section">
+          <h3>O MNIE</h3>
+          <p>{{ABOUT}}</p>
+        </div>
+
+        <div class="interests section">
+          <h3>ZAINTERESOWANIA</h3>
+          <p>{{INTERESTS}}</p>
+        </div>
+
+        <div class="certificat section">
+          <h3>CERTYFIKATY</h3>
+          <ul>
+            {{CERTIFICATES}}
+          </ul>
+        </div>
+
+        <div class="languages section">
+          <h3>JĘZYKI OBCE</h3>
+          <ul>
+            {{LANGUAGES}}
+          </ul>
+        </div>
+      </div>
+
+      <!-- PRAWA -->
+      <div class="right-column">
+        <header class="header">
+          <div>
+            <h1>{{NAME}} {{SURNAME}}</h1>
+            <h2>{{ABOUT}}</h2>
+
+            <div class="dotted-line"></div>
+
+            <div class="contacts">
+              <ul>
+                <li><i class="fa-solid fa-envelope"></i> {{EMAIL}}</li>
+                <li><i class="fa-solid fa-phone"></i> {{PHONE}}</li>
+                <li><i class="fa-solid fa-location-dot"></i> {{ADDRESS}}</li>
+              </ul>
+            </div>
+
+            <div class="dotted-line"></div>
+          </div>
+        </header>
+
+        <div class="experience section">
+          <h3>DOŚWIADCZENIE</h3>
+          {{EXPERIENCE}}
+        </div>
+
+        <div class="education section">
+          <h3>WYKSZTAŁCENIE</h3>
+          {{EDUCATION}}
+        </div>
+
+        <div class="skills section">
+          <h3>UMIEJĘTNOŚCI</h3>
+          <ul>
+            {{SKILLS}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

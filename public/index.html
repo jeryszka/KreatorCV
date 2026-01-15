@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kreator CV - Stwórz Profesjonalne CV Online</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon (2).png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* --- OGÓLNE STYLES I UKŁAD GRID --- */
@@ -23,43 +24,35 @@
             font-size: 1rem;
             display: flex;
             align-items: center;
-            justify-content: center; /* Wyśrodkowuje tytuł h1 */
+            justify-content: center;
             position: relative;
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
-            height: 100px; /* Zapewnienie stałej wysokości */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            height: 100px;
         }
         
-        /* Pozycjonowanie ikony menu na skraju, bez wpływu na centrowanie h1 */
-        menu {
-            position: absolute;
-            left: 20px;
-            font-size: 2rem;
-            cursor: pointer;
-            background: none;
-            border: none;
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
             color: #000a24;
-            /* Upewnienie się, że jest idealnie wyśrodkowane pionowo */
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 0; 
-            margin: 0;
-            line-height: 1; /* Korekta wysokości linii dla symbolu */
         }
 
         /* --- STOPKA --- */
         footer {
-            background-color: #000a24;
+            background: linear-gradient(90deg, #000a24 0%, #0d1f37 100%);
             display: flex;
             justify-content: center;
             flex-direction: column;
             align-items: center;
             height: 100px;
+            border-top: 1px solid rgba(77, 184, 255, 0.2);
         }
 
         #footer-text {
-            color: white;
-            font-size: 1rem;
+            color: #e0e0e0;
+            font-size: 0.95rem;
             font-weight: 400;
+            opacity: 0.9;
         }
 
         /* --- SEKCJA GŁÓWNA (HERO) - NAPRAWIONA --- */
@@ -67,33 +60,32 @@
             color: #FFFFFF;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            background-color: #000a24;
-            padding: 5rem 0; 
+            background: linear-gradient(135deg, #000a24 0%, #1a3a52 100%);
+            padding: 6rem 0;
         }
 
         .text {
             display: flex;
             flex-direction: column;
-            align-items: flex-start; 
+            align-items: flex-start;
             justify-content: center;
-            padding: 2rem 5rem;
+            padding: 3rem 5rem;
             text-align: left;
-            /* Zwiększenie elastyczności, aby kontener wypełniał przestrzeń */
-            min-height: 400px; 
+            min-height: 450px;
         }
 
         .hero-image {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
         }
         
         .hero-image img {
             max-width: 100%;
             height: auto;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
 
         .t1 {
@@ -108,40 +100,61 @@
 
         .t2 {
             font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 30px; 
+            line-height: 1.7;
+            margin-bottom: 30px;
+            opacity: 0.95;
         }
         
         .description-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-top: 15px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+        
+        .description-text ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .description-text li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+        }
+        
+        .description-text li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4db8ff;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
         
         /* NAPRAWIONY PRZYCISK: Upewnienie się, że stoi sam, a nie jest częścią jakiegoś marginesu */
         #anchor-button {
-            color: #000a24;
+            color: white;
             border: none;
             width: 220px;
-            height: 60px;
-            background-color: #f7f7f7;
+            height: 55px;
+            background: linear-gradient(135deg, #4db8ff 0%, #0088cc 100%);
             border-radius: 8px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s, transform 0.2s;
+            transition: all 0.3s ease;
             text-decoration: none;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            /* Zapewnienie, że przycisk ma margines tylko poniżej, nie jest sklejony z resztą tekstu */
-            margin-top: 20px; 
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(77, 184, 255, 0.3);
         }
 
         #anchor-button:hover {
-            background-color: #4b5770;
-            color: white;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(77, 184, 255, 0.4);
+            background: linear-gradient(135deg, #66c3ff 0%, #0099dd 100%);
         }
 
         /* --- SEKCJA SZABLONÓW --- */
@@ -150,57 +163,72 @@
             justify-content: center;
             flex-direction: column;
             align-items: center;
-            background-color: #f4f7f6;
+            background: linear-gradient(180deg, #f4f7f6 0%, #e9eef1 100%);
             color: #000a24;
-            padding: 80px 20px;
+            padding: 100px 20px;
         }
 
         .template-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
 
         #text-t3-p {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            color: #000a24;
         }
 
         .t3 {
-            font-size: 1.1rem;
-            line-height: 1.5;
-            max-width: 800px;
+            font-size: 1.15rem;
+            color: #666;
+            opacity: 0.85;
+            line-height: 1.6;
+            max-width: 900px;
         }
 
         #CVtemplates {
             display: grid;
-            grid-template-columns: repeat(4, 250px);
-            gap: 30px;
+            grid-template-columns: repeat(4, 260px);
+            gap: 50px;
             width: fit-content;
-            margin-top: 20px;
+            margin-top: 50px;
+            padding: 20px;
         }
 
         .temp {
-            width: 250px;
-            height: 350px;
-            background-color: #e0e0e0;
-            border-radius: 6px;
+            width: 260px;
+            height: 360px;
+            background: #07173d;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s, transform 0.3s;
-            border: 1px solid #c0c0c0;
+            border: 2px solid transparent;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #4b5770;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
             text-decoration: none;
+            text-align: center;
+            padding: 20px;
         }
         
         .temp:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(77, 184, 255, 0.3);
+            transform: translateY(-8px);
+            border-color: #4db8ff;
+            background: #0d2555;
+        }
+
+        .temp img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Druga sekcja korzyści */
@@ -221,6 +249,15 @@
             background: #07173d; 
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        
+        .benefit-card h4 {
+            color: white;
+        }
+        
+        .benefit-card p {
+            color: #e0e0e0;
         }
 
 
@@ -267,10 +304,7 @@
     </style>
 </head>
 <body>
-    <header>
-        <button type="button" aria-label="Menu" style="all: unset;"><menu>☰</menu></button>
-        <h1>KREATOR CV</h1>
-    </header>
+    <header><h1>KREATOR CV</h1></header>
     <main>
         <div id="content-container">
             <div class="text"> 
@@ -292,13 +326,14 @@
         <div id="CVtemplate-container">
             <div class="template-header t3">
                 <p id="text-t3-p">Darmowe Szablony CV, Które Działają!</p>
-                Wybierz jeden z profesjonalnie zaprojektowanych wzorów. Każdy szablon jest w pełni konfigurowalny i zoptymalizowany pod kątem systemów ATS (Automatyczne Systemy Śledzenia Kandydatów).
+                Wybierz jeden z czterech profesjonalnie zaprojektowanych szablonów, dostosowany do Twojego stylu. Każdy z nich jest w pełni responsywny i gotowy do pobrania w formacie PDF.
             </div>
 
             <div id="CVtemplates">
                 <a href="cv-form.html?template=1" class="temp">Nowoczesny (domyślny)</a>
-                <a href="cv-form.html?template=2" class="temp">Minimalistyczny</a>
-                <a href="cv-form.html?template=3" class="temp">Kreatywny</a>
+                <a href="cv-form.html?template=2" class="temp">Nowoczesny (odwrócony)</a>
+                <a href="cv-form.html?template=3" class="temp">Elegancki</a>
+                <a href="cv-form.html?template=4" class="temp">Kreatywny</a>
             </div>
         </div>
         
@@ -313,8 +348,8 @@
                     <p style="margin-bottom: 0;">Wypełnij proste pola i zobacz podgląd w czasie rzeczywistym. Gotowe CV w mniej niż 5 minut.</p>
                 </div>
                 <div class="text t3 benefit-card">
-                    <h4 style="margin-top: 0; font-size: 1.3rem;">✅ Zgodność z ATS</h4>
-                    <p style="margin-bottom: 0;">Nasze szablony są testowane, by bez problemu przejść skanowanie przez systemy rekrutacyjne.</p>
+                    <h4 style="margin-top: 0; font-size: 1.3rem;">✨ Profesjonalne Szablony</h4>
+                    <p style="margin-bottom: 0;">Wybierz spośród 4 nowoczesnych i eleganckich projektów, które zrobią wrażenie na rekruterach.</p>
                 </div>
                 <div class="text t3 benefit-card">
                     <h4 style="margin-top: 0; font-size: 1.3rem;">💯 100% Za Darmo</h4>

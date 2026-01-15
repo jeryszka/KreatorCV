@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kreator CV - Formularz</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon (2).png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         /* --- STYLES OGÓLNE I UKŁAD --- */
         body {
             font-family: 'Roboto', Arial, sans-serif;
-            background-color: #f4f7f6; /* Złamana biel */
+            background-color: #e9eef1;
             margin: 0;
             padding: 0;
             padding-bottom: 50px;
@@ -42,14 +43,47 @@
             line-height: 1;
         }
         
-        /* --- KONTENER GŁÓWNY --- */
+        /* --- KONTENER GŁÓWNY (2-KOLUMNOWY) --- */
         .container {
-            max-width: 750px; /* Nieco szerszy, aby pomieścić dynamiczne sekcje */
+            max-width: 1600px;
             margin: 40px auto 0 auto;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Kolumna formularza */
+        .form-column {
+            flex: 0 0 45%;
             background-color: white;
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Kolumna podglądu */
+        .preview-column {
+            flex: 0 0 55%;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            max-height: 100vh;
+            overflow-y: auto;
+            border-radius: 12px;
+            box-shadow: none;
+        }
+
+        /* Ukryj paski przewijania */
+        .preview-column::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+
+        .preview-column iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
         }
         
         #formh1 {
@@ -240,6 +274,36 @@
         #addSkillBtn, #addCertBtn {
             color: white;
         }
+
+        /* Responsywność */
+        @media (max-width: 1400px) {
+            .container {
+                flex-direction: column;
+            }
+            .form-column {
+                flex: 1;
+            }
+            .preview-column {
+                position: relative;
+                top: 0;
+                height: 800px;
+                sticky: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 40px 10px 0 10px;
+                flex-direction: column;
+            }
+            .form-column {
+                padding: 20px;
+            }
+            .preview-column {
+                height: 600px;
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -251,9 +315,10 @@
         </menu>
     </header>
     <div class="container">
-        <h1 id="formh1">Formularz CV</h1>
+        <div class="form-column">
+            <h1 id="formh1">Formularz CV</h1>
 
-        <form id="cvForm" method="POST" enctype="multipart/form-data">
+            <form id="cvForm" method="POST" enctype="multipart/form-data">
             
             <div class="dynamic-section-wrapper" style="background-color: #e0e7ff40;">
                 <h2 class="section-header">Wybór Szablonu</h2>
@@ -261,8 +326,9 @@
                     <label for="templateSelect">Wybierz szablon CV:</label>
                     <select name="template" id="templateSelect" style="width: 95%; padding: 12px; margin-left: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px;">
                         <option value="1">Nowoczesny (domyślny)</option>
-                        <option value="2">Minimalistyczny</option>
-                        <option value="3">Kreatywny</option>
+                        <option value="2">Nowoczesny (odwrócony)</option>
+                        <option value="3">Elegancki</option>
+                        <option value="4">Kreatywny</option>
                     </select>
                 </div>
             </div>
@@ -391,6 +457,12 @@
 
         <button id="loadJsonBtn">Wczytaj dane z JSON</button>
         <input type="file" id="jsonFileInput" accept=".json" style="display:none">
+            </form>
+        </div>
+
+        <div class="preview-column">
+            <iframe id="previewFrame" title="CV Preview"></iframe>
+        </div>
     </div>
 
     <script>
@@ -609,9 +681,25 @@
         form.addEventListener('submit', (event) => {
             event.preventDefault();
             
-            // Zebranie wszystkich danych formularza
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
+            // Zebranie wszystkich danych bezpośrednio z DOM elementów
+            const data = {
+                template: document.getElementById('templateSelect').value || '1',
+                name: form.name.value || '',
+                surname: form.surname.value || '',
+                address: form.address.value || '',
+                phone: form.phone.value || '',
+                email: form.email.value || '',
+                linkedin: form.linkedin.value || '',
+                portfolio: form.portfolio.value || '',
+                about: form.about.value || '',
+                skills: form.querySelector('input[name="skills"]').value || '',
+                certificates: form.querySelector('input[name="certificates"]').value || '',
+                languages: form.languages.value || '',
+                interests: form.interests.value || '',
+                experience_data: document.getElementById('experienceHidden').value || '[]',
+                education_data: document.getElementById('educationHidden').value || '[]',
+                rodo: form.rodo.checked ? 'on' : ''
+            };
             
             // Obsługa zdjęcia - konwersja do base64
             const photoInput = form.querySelector('input[name="photo"]');
@@ -696,6 +784,147 @@
             };
             reader.readAsText(file);
         });
+
+        // =======================================================
+        // 5. AKTUALIZACJA PODGLĄDU W CZASIE RZECZYWISTYM
+        // =======================================================
+        
+        const previewFrame = document.getElementById('previewFrame');
+        let previewTimeout;
+
+        function updatePreview() {
+            clearTimeout(previewTimeout);
+            previewTimeout = setTimeout(() => {
+                const templateNumber = document.getElementById('templateSelect').value || '1';
+                let templateFilename = "cv-template.html";
+                
+                if (templateNumber === "2") {
+                    templateFilename = "cv-template2.html";
+                } else if (templateNumber === "3") {
+                    templateFilename = "cv-template3.html";
+                } else if (templateNumber === "4") {
+                    templateFilename = "cv-template4.html";
+                }
+
+                const name = form.name.value || '';
+                const surname = form.surname.value || '';
+                const address = form.address.value || '';
+                const phone = form.phone.value || '';
+                const email = form.email.value || '';
+                const linkedin = form.linkedin.value || '';
+                const portfolio = form.portfolio.value || '';
+                const about = form.about.value || '';
+                const languages = form.languages.value || '';
+                const interests = form.interests.value || '';
+                const skills = form.querySelector('input[name="skills"]').value || '';
+                const certificates = form.querySelector('input[name="certificates"]').value || '';
+                
+                // Pobranie danych doświadczenia i edukacji z formularza
+                const experienceItems = Array.from(document.querySelectorAll('[data-section="experience"] + input, #experienceHidden')).map(el => {
+                    if (el.id === 'experienceHidden') {
+                        try {
+                            return JSON.parse(el.value);
+                        } catch {
+                            return [];
+                        }
+                    }
+                });
+                
+                const educationItems = Array.from(document.querySelectorAll('[data-section="education"] + input, #educationHidden')).map(el => {
+                    if (el.id === 'educationHidden') {
+                        try {
+                            return JSON.parse(el.value);
+                        } catch {
+                            return [];
+                        }
+                    }
+                });
+
+                const experienceArray = JSON.parse(document.getElementById('experienceHidden').value || '[]');
+                const educationArray = JSON.parse(document.getElementById('educationHidden').value || '[]');
+                // Generowanie HTML dynamicznych sekcji
+                const experienceHTML = experienceArray.map(exp => `
+                    <div class="job">
+                        <h4>${exp.role || ''} – ${exp.company || ''}</h4>
+                        <span>${exp.years || ''}</span>
+                        <p>${(exp.description || '').replace(/\n/g, '<br>')}</p>
+                    </div>
+                `).join('');
+                
+                const educationHTML = educationArray.map(edu => `
+                    <div class="school">
+                        <h4>${edu.degree || ''}</h4>
+                        <span>${edu.field || ''}</span>
+                        <span>${edu.institution || ''} ${edu.years || ''}</span>
+                    </div>
+                `).join('');
+                
+                const skillsArray = skills ? skills.split(';').map(s => s.trim()).filter(s => s.length > 0) : [];
+                const skillsHTML = skillsArray.map(skill => `<li>${skill}</li>`).join('');
+                
+                const certificatesArray = certificates ? certificates.split(';').map(c => c.trim()).filter(c => c.length > 0) : [];
+                const certificatesHTML = certificatesArray.map(cert => `<li>${cert}</li>`).join('');
+
+                // Obsługa zdjęcia
+                const photoInput = form.querySelector('input[name="photo"]');
+                let photoData = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%23f0f0f0' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='80' fill='%23999' text-anchor='middle' dy='.3em'%3E📷%3C/text%3E%3C/svg%3E";
+                
+                if (photoInput && photoInput.files && photoInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        photoData = e.target.result;
+                        generatePreviewHTML(templateFilename, photoData);
+                    };
+                    reader.readAsDataURL(photoInput.files[0]);
+                } else {
+                    generatePreviewHTML(templateFilename, photoData);
+                }
+
+                function generatePreviewHTML(templateFile, photo) {
+                    fetch(`/cv-templates/${templateFile}`)
+                        .then(response => response.text())
+                        .then(html => {
+                            let previewHTML = html
+                                .replaceAll("{{NAME}}", name)
+                                .replaceAll("{{SURNAME}}", surname)
+                                .replaceAll("{{ADDRESS}}", address)
+                                .replaceAll("{{EMAIL}}", email)
+                                .replaceAll("{{PHONE}}", phone)
+                                .replaceAll("{{LINKEDIN}}", linkedin)
+                                .replaceAll("{{PORTFOLIO}}", portfolio)
+                                .replaceAll("{{ABOUT}}", about.replace(/\n/g, "<br>"))
+                                .replaceAll("{{EXPERIENCE}}", experienceHTML)
+                                .replaceAll("{{EDUCATION}}", educationHTML)
+                                .replaceAll("{{SKILLS}}", skillsHTML)
+                                .replaceAll("{{CERTIFICATES}}", certificatesHTML)
+                                .replaceAll("{{LANGUAGES}}", languages.replace(/\n/g, "<br>"))
+                                .replaceAll("{{INTERESTS}}", interests.replace(/\n/g, "<br>"))
+                                .replaceAll("{{PHOTO}}", photo);
+                            
+                            // Wyświetl w iframe
+                            const iframeDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+                            iframeDoc.open();
+                            iframeDoc.write(previewHTML);
+                            iframeDoc.close();
+                        })
+                        .catch(error => console.error('Błąd pobrania szablonu:', error));
+                }
+            }, 500); // Debounce - czeka 500ms przed aktualizacją
+        }
+
+        // Nasłuchuj zmian w formularzu
+        form.addEventListener('input', updatePreview);
+        form.addEventListener('change', updatePreview);
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-item-btn') || 
+                e.target.classList.contains('add-item-button') ||
+                e.target.classList.contains('remove-tag-btn')) {
+                updatePreview();
+            }
+        });
+
+        // Pierwszy podgląd przy wczytaniu strony
+        setTimeout(updatePreview, 100);
     </script>
 </body>
 </html>
